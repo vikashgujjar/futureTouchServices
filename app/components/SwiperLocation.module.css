@@ -1,0 +1,18 @@
+.swiper {
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  min-height: 480px;
+}
