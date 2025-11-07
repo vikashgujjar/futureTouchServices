@@ -180,6 +180,40 @@ const CommonServiceUI = () => {
     },
   ];
 
+  
+const cards = [
+  {
+    count: "100+",
+    title: "Applications Maintained",
+    desc: "We have successfully maintained over 100 web applications, ensuring optimal performance, smooth functionality, and timely updates. Each application is carefully monitored to provide seamless experiences for your users.",
+      image: "/Assets/seerviceSlider/slide1.webp",
+  },
+  {
+    count: "10+",
+    title: "Years of Expertise",
+    desc: "With over 10 years of experience in web application maintenance and support, our team brings deep technical knowledge to every project. We ensure best practices, modern technologies, and effective maintenance strategies are applied.",
+      image: "/Assets/seerviceSlider/slide2.webp",
+  },
+  {
+    count: "500+",
+    title: "Clients Supported Globally",
+    desc: "Trusted by over 500 clients worldwide, we provide reliable maintenance and support for diverse web applications. Our experience spans multiple industries, ensuring your app stays robust and fully functional across all platforms.",
+      image: "/Assets/seerviceSlider/slide3.webp",
+  },
+  {
+    count: "98%",
+    title: "Satisfaction Rate",
+    desc: "Our client-centric approach has earned a 98% satisfaction rate. We focus on delivering proactive maintenance, timely updates, and responsive support, ensuring every application operates smoothly and meets client expectations.",
+      image: "/Assets/seerviceSlider/slide4.webp",
+  },
+  {
+    count: "24/7",
+    title: "Dedicated Support",
+    desc: "We provide round-the-clock support for all web applications. Our dedicated team resolves technical issues quickly, optimizes performance, and ensures your applications remain reliable and accessible at all times.",
+      image: "/Assets/seerviceSlider/slide5.webp",
+  },
+];
+
   return (
     <>
       <CommonBanner
@@ -359,7 +393,7 @@ const CommonServiceUI = () => {
       </div>
 
       {/* <CustomSlider/> */}
-      <CommonSlider/>
+      <CommonSlider cards={cards}/>
 
       {/* upscale your buiness  */}
 
