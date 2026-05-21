@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import Image from 'next/image';
 export default function CommonBannerService({imgSrc,title,desc}) {
   return (
@@ -18,7 +18,7 @@ export default function CommonBannerService({imgSrc,title,desc}) {
                   <div className="flex gap-3 mt-5">
                     <a
                       href="/contact"
-                      className="flex items-center bg-[#dc3545] justify-center bg-red text-white py-2 px-4 sm:px-8 font-heading transition duration-400 ease-in-out rounded-md text-base font-base focus:outline-none hover:bg-gray-300 hover:bg-gradient-to-r from-teal-400 to-indigo-700"
+                      className="inline-flex items-center gap-2 justify-center bg-gradient-to-r from-violet-600 to-indigo-600 text-white py-2.5 px-7 font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-violet-300/40 hover:-translate-y-0.5"
                     >
                       Quick Enquiry
                     </a>

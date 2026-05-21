@@ -1,199 +1,162 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaCheckCircle, FaArrowRight } from "react-icons/fa";
+
+const highlights = [
+  "Full-stack web & mobile solutions",
+  "250+ in-house developers & designers",
+  "Agile delivery — on time, every time",
+  "Trusted by clients in 120+ countries",
+];
+
+const progressBars = [
+  { label: "Brand Strategy & Art Direction", percent: 75 },
+  { label: "UX/UI Design & Website / App Design", percent: 82 },
+  { label: "Trending Designing Experience", percent: 70 },
+  { label: "Creative Development & Innovation", percent: 88 },
+];
+
+const badges = [
+  { value: "15+", label: "Years Experience" },
+  { value: "5000+", label: "Projects Done" },
+  { value: "250+", label: "Team Members" },
+  { value: "100%", label: "Satisfaction" },
+];
 
 export default function About() {
   return (
-    <div>
-      <div className="hero-about block mt-20 px-5 mb-20 relative sm:px-5 md:px-12 xl:px-28 sm:block md:block lg:flex">
-        <div className="absolute bottom-0 sm:bottom-0  md:bottom-3 lg:bottom-6 left-0">
-          <Image
-            src="/Assets/h2-about-bg-3.webp"
-            width={500}
-            height={500}
-            alt="About section background graphic"
-          />
-        </div>
-        <div className="relative flex w-11/12 sm:w-11/12 md:full lg:w-1/2 ">
-          <div className="hero-images mr-5 relative w-full max-w-335 lg:h-490 animate-zoom-in-out ">
-            <Image
-              className="image-one object-cover"
-              src="/Assets/hero-about-1.webp"
-              width={200}
-              height={300}
-              alt="Team working together illustration"
-            />
+    <section
+      className="relative min-h-[700px] flex items-center overflow-hidden"
+      style={{
+        backgroundImage: "url('/Assets/hero-about-1.webp')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Dark gradient overlay — heavier on left for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0f0720]/95 via-[#1a0b3a]/88 to-[#1a0b3a]/55" />
 
-            <Image
-              className="shape-1 absolute"
-              src="/Assets/about2-shape-1.webp"
-              width={60}
-              height={60}
-              alt="Decorative shape 1"
-              style={{ height: "220px", width: "auto" }}
-            />
-          </div>
-          <div className="hero-images-two w-full relative animate-zoom-in-out">
-            <Image
-              className="image-two object-cover"
-              src="/Assets/h2-about-img-right.webp"
-              width={200}
-              height={300}
-              alt="Creative digital solutions illustration"
-            />
+      {/* Decorative blobs */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-violet-600/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
 
-            <Image
-              className="shape-2 absolute"
-              src="/Assets/about2-shape-2.webp"
-              width={60}
-              height={60}
-              alt="Decorative shape 2"
-              style={{ height: "100px", width: "auto" }}
-            />
-            <div className="about-circle-box absolute">
-              <div className="ab-circle">
-                <svg
-                  className="shape-circle"
-                  viewBox="0 0 100 100"
-                  width="100"
-                  height="100"
-                >
-                  <defs>
-                    <path
-                      id="circle"
-                      d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
-                    ></path>
-                  </defs>
-                  <text fontSize="15">
-                    <textPath xlinkHref="#circle" className="shape-1">
-                      Future IT Touch Pvt. Ltd. Future I
-                    </textPath>
-                  </text>
-                </svg>
-              </div>
+      {/* Content */}
+      <div className="relative w-full px-4 sm:px-6 md:px-12 xl:px-28 py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+          {/* ── Left col: main content ── */}
+          <div className="lg:col-span-7">
+
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold text-violet-300 mb-6">
+              <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
+              About Future IT Touch
             </div>
-          </div>
-          <Image
-            className="hidden sm:block md:block lg:block absolute bottom-0 w-40 left-40"
-            src="/Assets/h2-about-bg-1.webp"
-            width={160}
-            height={80}
-            alt="About section lower background graphic"
-          />
-        </div>
 
-        <div className="w-full sm:w-full md:full lg:w-1/2 pl-0 sm:pl-0 md:pl-5 lg:pl-14">
-          <Image
-            className="hidden sm:block md:block lg:block absolute top-10 w-28 right-20 "
-            src="/Assets/h2-about-bg-2.webp"
-            width={112}
-            height={56}
-            alt="About section upper background graphic"
-          />
-          <span
-            className=" text-4xl mb-8 bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text tracking-widest"
-            style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
-          >
-            About Us
-          </span>
-          <h3 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl mt-3 mb-4 sm:mt-3 md:mt-4 lg:mt-5  sm:mb-4 md:mb-6 lg:mb-8  font-bold">
-            Creative Problem <br /> Solving{" "}
-            <span className="bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text">
+            {/* Heading */}
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+              Creative Problem{" "}
+              <span className="bg-gradient-to-r from-violet-400 to-indigo-300 bg-clip-text text-transparent">
+                Solving &amp;
+              </span>{" "}
               Innovation
-            </span>
-          </h3>
+            </h2>
 
-          <p className="text-lg mb-8 font-small text-justify">
-            Founded in 2017, Future IT Touch is a leading website designing and
-            development company in India. We specialize in creating innovative
-            and user-friendly digital solutions that help businesses thrive in
-            the online world. Our dedicated team combines creativity and
-            technical expertise to deliver exceptional results tailored to your
-            needs.
-          </p>
+            <p className="text-white/70 text-lg leading-relaxed mb-8 max-w-2xl">
+              Founded in 2017, Future IT Touch is a leading website designing and
+              development company in India. We specialise in creating innovative,
+              user-friendly digital solutions that help businesses thrive in the
+              online world — powered by a team of 250+ experts.
+            </p>
 
-          <div className=" grid-for-main-blog md:flex-wrap md:gap-4 lg:flex-wrap lg:gap-x-4 lg:gap-y-8 lg:w-full  ">
-            <div className="max-w-300 w-full about-width font-semibold p-4 border border-purple-600 rounded-lg ">
-              <div className="about-category-item flex gap-x-5">
-                <div className="about-icon ">
-                  <Image
-                    className="w-12 relative top-2 "
-                    src="/Assets/market-positioning.webp"
-                    width={48}
-                    height={48}
-                    alt="Market positioning icon"
-                  />
+            {/* Highlights — 2 col grid */}
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+              {highlights.map((item) => (
+                <li key={item} className="flex items-center gap-3 text-white/80">
+                  <FaCheckCircle className="text-violet-400 w-4 h-4 shrink-0" />
+                  <span className="text-sm font-medium">{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* Progress bars */}
+            <div className="space-y-4 mb-10">
+              {progressBars.map((item) => (
+                <div key={item.label}>
+                  <div className="flex justify-between mb-1.5">
+                    <span className="text-white/70 text-sm font-medium">
+                      {item.label}
+                    </span>
+                    <span className="text-violet-300 text-sm font-bold">
+                      {item.percent}%
+                    </span>
+                  </div>
+                  <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-violet-400 to-indigo-400"
+                      style={{ width: `${item.percent}%` }}
+                    />
+                  </div>
                 </div>
-                <div className="about-text">
-                  <h5 className="title font-semibold text-lg">
-                    Brand Strategy & Art Direction
-                  </h5>
-                </div>
-              </div>
+              ))}
             </div>
-            <div className="max-w-300 w-full about-width font-semibold p-4 border border-purple-600 rounded-lg ">
-              <div className="about-category-item flex gap-x-5">
-                <div className="about-icon">
-                  <Image
-                    className="w-12 relative top-2"
-                    src="/Assets/ui.webp"
-                    width={48}
-                    height={48}
-                    alt="UI/UX design icon"
-                  />
-                </div>
-                <div className="about-text">
-                  <h5 className="title font-semibold text-lg">
-                    UX/UI Design & Website / App Design
-                  </h5>
-                </div>
-              </div>
-            </div>
-            <div className="max-w-300 w-full about-width font-semibold p-4 border border-purple-600 rounded-lg ">
-              <div className="about-category-item flex gap-x-5">
-                <div className="about-icon">
-                  <Image
-                    className="w-12 relative top-2 "
-                    src="/Assets/trending-topic.webp"
-                    width={48}
-                    height={48}
-                    alt="Trending design icon"
-                  />
-                </div>
-                <div className="about-text">
-                  <h5 className="title font-semibold text-lg">
-                    Trending Designing Experience
-                  </h5>
-                </div>
-              </div>
-            </div>
-            <div className="max-w-300 w-full about-width font-semibold p-4 border border-purple-600 rounded-lg ">
-              <div className="about-category-item flex gap-x-5">
-                <div className="about-icon">
-                  <Image
-                    className="w-12 relative top-2"
-                    src="/Assets/compass.webp"
-                    width={48}
-                    height={48}
-                    alt="Compass icon"
-                  />
-                </div>
-                <div className="about-text">
-                  <h5 className="title font-semibold text-lg">
-                    Brand Strategy & Art Direction
-                  </h5>
-                </div>
-              </div>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-7 py-3.5 rounded-full font-semibold hover:shadow-lg hover:shadow-violet-500/30 hover:-translate-y-0.5 transition-all duration-200 text-sm"
+              >
+                Read More About Us <FaArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 border border-white/30 text-white px-7 py-3.5 rounded-full font-semibold hover:bg-white/10 transition-all duration-200 text-sm"
+              >
+                Get In Touch
+              </Link>
             </div>
           </div>
 
-          <Link
-            href="/contact"
-            className="flex items-center mt-5  justify-center bg-gradient-to-r from-gray-700 to-gray-700 text-white py-4 px-8 font-heading transition duration-400 ease-in-out rounded-md text-base font-medium focus:outline-none hover:bg-gray-300 hover:bg-gradient-to-r hover:from-teal-400 hover:to-indigo-700"
-          >
-            Read More
-          </Link>
+          {/* ── Right col: stat cards + secondary image ── */}
+          <div className="lg:col-span-5 flex flex-col gap-4">
+
+            {/* 2×2 stat grid */}
+            <div className="grid grid-cols-2 gap-4">
+              {badges.map((b) => (
+                <div
+                  key={b.label}
+                  className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-6 text-center hover:bg-white/15 hover:-translate-y-1 transition-all duration-200"
+                >
+                  <p className="text-3xl font-extrabold bg-gradient-to-r from-violet-300 to-indigo-300 bg-clip-text text-transparent">
+                    {b.value}
+                  </p>
+                  <p className="text-white/60 text-xs font-medium mt-2 leading-snug">
+                    {b.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Secondary image card */}
+            <div className="relative h-60 rounded-2xl overflow-hidden border border-white/20 shadow-xl">
+              <Image
+                src="/Assets/h2-about-img-right.webp"
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                alt="Our creative solutions"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-violet-900/70 to-transparent" />
+              <p className="absolute bottom-3 left-4 text-white text-sm font-semibold">
+                Creative Digital Solutions
+              </p>
+            </div>
+
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

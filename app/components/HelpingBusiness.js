@@ -1,150 +1,79 @@
 import React from "react";
-
 import Image from "next/image";
+import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
+
+const industries = [
+  { id: 1, src: "/Assets/icon-1.webp", text: "Social Networking", color: "bg-blue-50 border-blue-100" },
+  { id: 2, src: "/Assets/icon-2.webp", text: "Digital Marketing", color: "bg-green-50 border-green-100" },
+  { id: 3, src: "/Assets/icon-3.webp", text: "Ecommerce", color: "bg-purple-50 border-purple-100" },
+  { id: 4, src: "/Assets/icon-4.webp", text: "Video Service", color: "bg-yellow-50 border-yellow-100" },
+  { id: 5, src: "/Assets/icon-5.webp", text: "Banking Service", color: "bg-red-50 border-red-100" },
+  { id: 6, src: "/Assets/icon-6.webp", text: "Enterprise", color: "bg-pink-50 border-pink-100" },
+  { id: 7, src: "/Assets/icon-7.webp", text: "Education", color: "bg-indigo-50 border-indigo-100" },
+  { id: 8, src: "/Assets/icon-8.webp", text: "Tour & Travels", color: "bg-amber-50 border-amber-100" },
+  { id: 9, src: "/Assets/icon-9.webp", text: "Health Service", color: "bg-sky-50 border-sky-100" },
+  { id: 10, src: "/Assets/icon-10.webp", text: "Event & Ticket", color: "bg-lime-50 border-lime-100" },
+  { id: 11, src: "/Assets/icon-11.webp", text: "Restaurant", color: "bg-orange-50 border-orange-100" },
+  { id: 12, src: "/Assets/icon-12.webp", text: "Business Consulting", color: "bg-teal-50 border-teal-100" },
+];
 
 export default function IndustriesSection() {
-  const cardsData = [
-    {
-      id: 1,
-      src: "/Assets/icon-1.webp",
-      alt: "Industries",
-      text: "Social Networking",
-      bgColor: "bg-blue-200",
-    },
-    {
-      id: 2,
-      src: "/Assets/icon-2.webp",
-      alt: "Industries",
-      text: "Digital Marketing",
-      bgColor: "bg-green-200",
-    },
-    {
-      id: 3,
-      src: "/Assets/icon-3.webp",
-      alt: "Industries",
-      text: "Ecommerce Development",
-      bgColor: "bg-purple-200",
-    },
-    {
-      id: 4,
-      src: "/Assets/icon-4.webp",
-      alt: "Industries",
-      text: "Video Service",
-      bgColor: "bg-yellow-200",
-    },
-    {
-      id: 5,
-      src: "/Assets/icon-5.webp",
-      alt: "Industries",
-      text: "Banking Service",
-      bgColor: "bg-red-200",
-    },
-    {
-      id: 6,
-      src: "/Assets/icon-6.webp",
-      alt: "Industries",
-      text: "Enterprise Service",
-      bgColor: "bg-pink-200",
-    },
-    {
-      id: 7,
-      src: "/Assets/icon-7.webp",
-      alt: "Industries",
-      text: "Education Service",
-      bgColor: "bg-indigo-200",
-    },
-    {
-      id: 8,
-      src: "/Assets/icon-8.webp",
-      alt: "Industries",
-      text: "Tour and Travels",
-      bgColor: "bg-yellow-200",
-    },
-    {
-      id: 9,
-      src: "/Assets/icon-9.webp",
-      alt: "Industries",
-      text: "Health Service",
-      bgColor: "bg-blue-200",
-    },
-    {
-      id: 10,
-      src: "/Assets/icon-10.webp",
-      alt: "Industries",
-      text: "Event & Ticket",
-      bgColor: "bg-green-200",
-    },
-    {
-      id: 11,
-      src: "/Assets/icon-11.webp",
-      alt: "Industries",
-      text: "Restaurant Service",
-      bgColor: "bg-purple-200",
-    },
-    {
-      id: 12,
-      src: "/Assets/icon-12.webp",
-      alt: "Industries",
-      text: "Business Consultant",
-      bgColor: "bg-red-200",
-    },
-  ];
-
   return (
-    <section className="Business-domain mt-5 sm:mt-7 lg:mt-10 px-4 sm:px-6 md:px-12 lg:px-16 !py-10">
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-10">
+    <section className="py-20 px-4 sm:px-6 md:px-12 xl:px-28 bg-gray-50">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-16 items-center">
         {/* Left content */}
-        <div className="text-white px-2 sm:px-4 lg:px-10">
-          <div className="common-heading">
-            <span
-              className="text-3xl sm:text-4xl mb-6 block tracking-wider"
-              style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
-            >
-              Industries we work for
+        <div>
+          <span
+            className="text-4xl bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text tracking-widest block mb-2"
+            style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
+          >
+            Industries We Serve
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-3 mb-6">
+            Helping Businesses{" "}
+            <span className="bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text">
+              In All Domains
             </span>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-4 mb-6 w-full lg:w-[80%]">
-              Helping Businesses in All Domains
-            </h3>
-            <p className="text-justify text-base sm:text-lg mb-5">
-              We develop websites that build businesses! We believe, there is no
-              room for a one-size-fits-all approach in web development services.
-              Each website is unique and it needs a personal touch to meet
-              specific business needs. Our experienced UI/UX designers and full
-              stack web development team can effectively transform your idea
-              into reality.
-            </p>
-            <p className="text-justify text-base sm:text-lg">
-              As a reputable website development company in India, we've
-              assisted hundreds of companies worldwide to achieve their goals,
-              drive businesses growth, and create happy customers. From LAMP to
-              MEAN, business websites for startups to custom web applications
-              for corporate - we do it all! Engage our custom web design
-              services to build a stunning website for your business.
-            </p>
-          </div>
+          </h2>
+          <p className="text-gray-500 text-lg leading-relaxed mb-5">
+            We develop websites that build businesses. We believe there is no
+            room for a one-size-fits-all approach in web development — each
+            website needs a personal touch to meet specific business needs.
+          </p>
+          <p className="text-gray-500 text-base leading-relaxed mb-8">
+            As a reputable website development company in India, we've assisted
+            hundreds of companies worldwide to achieve their goals, drive
+            business growth, and create happy customers. From static sites to
+            complex web apps — we do it all!
+          </p>
+          <Link
+            href="/service"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-7 py-3.5 rounded-full font-semibold hover:shadow-lg hover:shadow-violet-200 hover:-translate-y-0.5 transition-all duration-200 text-sm"
+          >
+            Explore Our Services <FaArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
 
-        {/* Right content - Cards */}
-        <div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
-            {cardsData.map((card) => (
-              <div
-                key={card.id}
-                className={`work-card ${card.bgColor} flex flex-col items-center justify-center rounded-lg shadow-md p-5 hover:scale-105 transition-transform`}
-              >
-                <Image
-                  src={card.src}
-                  width={400}
-                  height={400}
-                  alt={card.alt}
-                  className="w-12 h-12 sm:w-14 sm:h-14 mb-3"
-                />
-                <p className="text-center text-sm sm:text-base font-medium">
-                  {card.text}
-                </p>
-              </div>
-            ))}
-          </div>
+        {/* Right: industry cards grid */}
+        <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
+          {industries.map((card) => (
+            <div
+              key={card.id}
+              className={`${card.color} border rounded-2xl flex flex-col items-center justify-center p-4 hover:shadow-md hover:-translate-y-1 transition-all duration-200`}
+            >
+              <Image
+                src={card.src}
+                width={48}
+                height={48}
+                alt={card.text}
+                className="w-10 h-10 mb-3 object-contain"
+              />
+              <p className="text-center text-xs sm:text-sm font-semibold text-gray-700 leading-tight">
+                {card.text}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

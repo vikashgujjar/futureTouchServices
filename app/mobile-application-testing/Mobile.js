@@ -1,367 +1,212 @@
 "use client";
-import Image from "next/image";
+import React from "react";
 import devops from "../Assets/app-develops.webp";
-import service1 from "../Assets/mob-1.webp";
-import service2 from "../Assets/mob-2.webp";
-import service3 from "../Assets/mob-3.webp";
-import service4 from "../Assets/mob-4.webp";
-import mission from "../Assets/process-1.webp";
-import vision1 from "../Assets/process-2.webp";
-import vision2 from "../Assets/Usability.webp";
-import vision3 from "../Assets/Cloud.webp";
-import vision4 from "../Assets/Cross.webp";
-import vision5 from "../Assets/Security.webp";
-import vision6 from "../Assets/Performance.webp";
-import { FaAngleRight, FaChevronRight } from "react-icons/fa";
-import Counter from "../components/Counter";
-import ChooseFuture from "../components/ChooseFuture";
-import GetNewInsight from "../components/GetNewInsight";
+import {
+  FaServer,
+  FaCheckCircle,
+  FaUserCheck,
+  FaCloud,
+  FaLayerGroup,
+  FaLock,
+  FaChartLine,
+} from "react-icons/fa";
+import { FaShieldAlt, FaCogs, FaHandshake } from "react-icons/fa";
+import ServicePageTemplate from "../components/ServicePageTemplate";
 
-import { useState } from "react";
+const CTA_DATA = {
+  badge: "Ready for expert app testing?",
+  preTitle: "Ensure Your App is",
+  highlight: "Bug-Free & Ready to Launch",
+  postTitle: "",
+  description:
+    "Get a free consultation with our mobile testing experts and discover how we can deliver flawless quality assurance for your iOS and Android applications.",
+  primaryCta: { label: "Get Free Consultation", href: "/contact" },
+  secondaryCta: { label: "Call: 7056937000", href: "tel:+917056937000" },
+  trustItems: ["No contracts", "Free consultation", "Results guaranteed"],
+  cardItems: [
+    { label: "Comprehensive test coverage", sub: "Functional, UI & regression" },
+    { label: "Cross-device & OS testing", sub: "iOS, Android & more" },
+    { label: "Security & penetration testing", sub: "Data protection assured" },
+    { label: "Detailed defect reports", sub: "Actionable insights delivered" },
+    { label: "Post-testing support", sub: "We stay with you after QA" },
+  ],
+  cardCta: { label: "Get App Testing Quote", href: "/contact" },
+  cardFootnote: "Free quote · No commitment required",
+};
+
 const Mobile = () => {
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-  
-    const handleButtonClick = () => setIsPopupOpen(true);
-    const handleClosePopup = () => setIsPopupOpen(false);
+  const features = [
+    {
+      title: "Installation Testing",
+      description:
+        "We verify that your application installs and operates correctly across various devices, OS versions, and configurations. Using the required tools and equipment, we ensure a smooth and error-free installation experience for every user.",
+      icon: <FaServer />,
+    },
+    {
+      title: "Functional Testing",
+      description:
+        "Functional testing ensures your app performs exactly as specified. Our independent QA team validates every feature and workflow with precision, reporting transparent results to help you meet the evolving expectations of your end users.",
+      icon: <FaCheckCircle />,
+    },
+    {
+      title: "Usability Testing",
+      description:
+        "Our usability testing covers both web and mobile versions, including screen resolution checks, compatibility across devices, OS systems, and A/B testing. We ensure your app conforms to system requirements and exceeds user expectations.",
+      icon: <FaUserCheck />,
+    },
+    {
+      title: "Cloud Testing",
+      description:
+        "We leverage leading cloud platforms including Amazon EC2 and Microsoft Azure for comprehensive cloud-based testing. Our cloud testing methodology covers functional, performance, compatibility, and globalization testing for maximum ROI.",
+      icon: <FaCloud />,
+    },
+    {
+      title: "Cross Platform (Hybrid) Testing",
+      description:
+        "To ensure optimal compatibility across Windows, Android, iOS, Linux, and macOS, our testers perform both automated and manual cross-platform QA — validating consistent performance and user experience on every supported platform.",
+      icon: <FaLayerGroup />,
+    },
+    {
+      title: "Security Testing",
+      description:
+        "Data security is a prime concern for every application. Our dedicated security testing team identifies vulnerabilities and loopholes from the earliest SDLC stages, conducting comprehensive penetration testing to safeguard your application.",
+      icon: <FaLock />,
+    },
+    {
+      title: "Performance Testing",
+      description:
+        "We assess your application's speed, scalability, and stability under real-world conditions. Our performance testing methodology identifies bottlenecks and ensures your app delivers a smooth, reliable experience even under peak load.",
+      icon: <FaChartLine />,
+    },
+  ];
+
+  const businessData = [
+    {
+      icons: <FaShieldAlt className="text-white w-8 h-8" />,
+      title: "Comprehensive QA Services",
+      desc: "Our fully functional QA services ensure product performance meets requirements. We validate data integrity across business flows and provide continuous 24x7 testing with strong infrastructure and disaster recovery plans.",
+    },
+    {
+      icons: <FaCogs className="text-white w-8 h-8" />,
+      title: "Advanced Testing Infrastructure",
+      desc: "Our dedicated testing labs with well-equipped servers simulate diverse client conditions. We leverage cloud infrastructure and web-enabled defect management tools for full transparency throughout the testing cycle.",
+    },
+    {
+      icons: <FaHandshake className="text-white w-8 h-8" />,
+      title: "Global Testing Teams",
+      desc: "Multiple teams across different GEOs track defects in real-time. Our organisation maintains multiple redundant servers ensuring 99.9% uptime, delivering consistent and reliable testing results for your application.",
+    },
+  ];
+
+  const platforms = [
+    {
+      icon: <FaServer className="text-white w-6 h-6" />,
+      title: "Installation & Compatibility Testing",
+      desc: "We verify smooth installation and compatibility across devices, OS versions, and screen resolutions to ensure your app runs flawlessly for every user on every platform.",
+    },
+    {
+      icon: <FaCheckCircle className="text-white w-6 h-6" />,
+      title: "Functional & Regression Testing",
+      desc: "Our team validates every feature, workflow, and user scenario against specifications, and performs regression testing after updates to ensure existing functionality remains intact.",
+    },
+    {
+      icon: <FaUserCheck className="text-white w-6 h-6" />,
+      title: "Usability & UX Testing",
+      desc: "We evaluate app usability through real-world user scenarios, A/B testing, and accessibility checks — ensuring your app delivers an intuitive and engaging experience for all users.",
+    },
+    {
+      icon: <FaCloud className="text-white w-6 h-6" />,
+      title: "Cloud & Performance Testing",
+      desc: "Leveraging cloud platforms like AWS and Azure, we simulate real-world traffic and load conditions to measure your app's performance, reliability, and scalability under stress.",
+    },
+    {
+      icon: <FaLayerGroup className="text-white w-6 h-6" />,
+      title: "Cross Platform Testing",
+      desc: "We test your app across iOS, Android, Windows, and other platforms using both automated and manual approaches to guarantee consistent behavior and performance everywhere.",
+    },
+    {
+      icon: <FaLock className="text-white w-6 h-6" />,
+      title: "Security & Penetration Testing",
+      desc: "Our security experts identify vulnerabilities, test for data leaks, and conduct penetration testing to ensure your application meets security standards and protects user data.",
+    },
+  ];
+
+  const faqData = [
+    {
+      title: "What mobile platforms do you test applications for?",
+      description:
+        "We test mobile applications for iOS, Android, and cross-platform apps including hybrid and React Native apps, across a wide range of devices, screen sizes, and OS versions.",
+    },
+    {
+      title: "What types of testing do you perform?",
+      description:
+        "We perform functional, installation, usability, performance, security, cloud, and cross-platform testing to ensure your app is thoroughly validated before and after launch.",
+    },
+    {
+      title: "Do you provide automated testing services?",
+      description:
+        "Yes, we offer both manual and automated testing using industry-leading tools. Automation is used for regression, performance, and repetitive test scenarios to improve speed and accuracy.",
+    },
+    {
+      title: "How do you ensure data security during testing?",
+      description:
+        "Our testing team follows strict data security protocols, uses secure test environments, and ensures that no sensitive data is exposed during the testing process.",
+    },
+    {
+      title: "Can you test apps that are already live?",
+      description:
+        "Absolutely! We provide testing services for apps at any stage — pre-launch, post-launch, or after major updates — to identify and resolve issues without disrupting your users.",
+    },
+    {
+      title: "Do you provide a testing report after completion?",
+      description:
+        "Yes, we deliver comprehensive testing reports that include identified defects, severity levels, test coverage summaries, and recommendations for improvement after every testing cycle.",
+    },
+  ];
+
   return (
-    <>
-      <div className="h-24 max-sm:h-[57px] max-md:h-20 max-lg:h-24 bg-white"></div>
-      <div className=" relative overflow-hidden bg-[#442a79] xl:min-h-96 max-lg:h-auto">
-        <div className="flex items-center max-sm:block max-lg:block  px-5 md:px-12 xl:px-28   max-sm:py-7 gap-10  pt-12 max-pt-1   max-xl:py-5">
-          <div className="  ">
-            <h1 className="text-white font-bold text-4xl  max-sm:text-2xl max-lg:text-xl">
-              WEBSITE, MOBILE APP & DIGITAL MARKETING SERVICES
-            </h1>
-
-            <div className="text-[#dcd7f8]  mt-3 text-lg text-justify max-lg:text-base">
-              <p>
-                We are a full-stack Branding, Website Development, App
-                Development, Digital marketing and web designing company in
-                Chandigarh with all the expertise you need to build a
-                successful, stable and scalable product. We follow our tried and
-                tested processes that ensures that the product is a marketfit,
-                and hence your marketing and technology partner.{" "}
-                <span className="font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text animate-hue">
-                  Future IT Touch Pvt. Ltd.
-                </span>
-                mobile app development & website design company in India offers
-                a comprehensive range of digital solutions for all your online
-                business needs. Our bouquet of services includes web design and
-                development, mobility solutions, digital marketing, and
-                corporate branding solutions. With our team of 50+ designers,
-                developers, content writers, and marketing experts, we have been
-                serving a global clientele in 3+ countries since 2017.
-              </p>
-            </div>
-            <div className="flex gap-3 mt-5">
-              <a
-                href="/contact"
-                className="flex items-center bg-[#dc3545] justify-center bg-red text-white py-2 px-4 sm:px-8 font-heading transition duration-400 ease-in-out rounded-md text-base font-base focus:outline-none hover:bg-gray-300 hover:bg-gradient-to-r from-teal-400 to-indigo-700"
-              >
-                Quick Enquiry
-              </a>
-              <button className="flex items-center bg-dark-200 justify-center border text-white py-2 px-2  sm:px-8 font-heading ">
-                <a href="tel:+917056937000">Call us - 7056937000</a>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <Counter />
-
-      <div className="bg-gradient-to-b from-[#fff6f3] to-[#fffefb] py-16 px-5 md:px-12 xl:px-28">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
-          <div className="md:col-span-4 flex justify-center">
-            <Image
-              src={devops}
-              className="w-72 md:w-96 rounded-lg"
-              width={400}
-              height={400}
-              alt="Mobile app development illustration"
-            />
-          </div>
-
-          <div className="md:col-span-8">
-            <span className="text-base md:text-lg text-[#e60072] uppercase block mb-3">
-              Overview
-            </span>
-            <h3 className="text-2xl md:text-3xl lg:text-4xl text-[#050748] font-bold leading-snug">
-              Mobile Application Testing
-            </h3>
-            <p className="text-base md:text-lg lg:text-xl text-[#6a6a8e] text-justify mt-5">
-              Future IT Touch is an eminent Mobile Application Testing
-              organization that offers astounding versatile application testing
-              administration. We developed our specialty in Mobile testing,
-              particularly in mobile testing applications of iOS and Android
-              gadgets. With a group of devoted certified testers, we play out a
-              wide range of web, mobile, local and cross platform portable
-              applications testing. So we are including a proven great mobile
-              testing approach. We test applications for its functionality,
-              usability, consistency and compatibility for longer use and
-              stability.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="px-5 md:px-12 xl:px-28">
-        <h4 className="text-3xl md:text-4xl text-center font-bold mb-10 text-[#050748]">
-          Why FTS for Testing?
-        </h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pb-14">
-          <div>
-            <p className="mb-6 text-[#050748] text-xl md:text-2xl font-bold">
-              Advantages of Mobile App Development
-            </p>
-            <ul className="space-y-4 text-[15px] md:text-[17px] text-justify text-[#6a6a8e]">
-              <li>
-                Completely utilitarian QA administrations for every client
-                ensures that product functionality performs as per requirements.
-              </li>
-              <li>Validation of data integrity across business flows.</li>
-              <li>
-                Strong infrastructure and disaster recovery plans provide
-                continuous testing services (24x7).
-              </li>
-              <li>
-                Our organisation has multiple redundant servers ensuring 99.9%
-                uptime.
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="mb-6 text-[#050748] text-xl md:text-2xl font-bold">
-              Advantages of Mobile App Development
-            </p>
-            <ul className="space-y-4 text-[15px] md:text-[17px] text-justify text-[#6a6a8e]">
-              <li>
-                Dedicated testing labs with well-equipped servers simulate
-                diverse client conditions and leverage cloud infrastructure.
-              </li>
-              <li>
-                Use of web-enabled defect management tools ensures transparency
-                in the testing cycle.
-              </li>
-              <li>
-                Multiple teams across different GEOs track defects in real-time.
-              </li>
-            </ul>
-            <button className="bg-gradient-to-r from-[#f92c8b] to-[#b02cd6] flex items-center mt-7 text-white px-6 py-3 md:py-4 text-sm md:text-base font-semibold rounded-full shadow-lg hover:scale-105 transition-transform">
-              Request A Quote <FaAngleRight className="ml-2" />
-              <span className="circle dkpr"></span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <section className="service-section py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-5 text-center">
-          <span className="text-5xl font-bold text-[#e60072] uppercase">
-            Our Services
-          </span>
-          <h2 className="mt-4 mb-12 text-lg text-[#6a6a8e] max-w-3xl mx-auto">
-            We think big and have hands in all leading technology platforms to
-            provide you wide array of services.
-          </h2>
-
-          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-            <div className="flex flex-col lg:flex-row bg-[#e9ddff] rounded-lg shadow-lg p-6 gap-4 items-center">
-              <Image
-                src={service1}
-                width={400}
-                height={400}
-                alt="iOS app development service illustration"
-                className="w-full sm:w-40"
-              />
-              <div className="text-center sm:text-left text-[#6a6a8e]">
-                <h4 className="text-2xl font-bold mb-2 text-[#050748]">
-                  IOS App Development
-                </h4>
-                <p className="text-lg">
-                  We provide cutting-edge mobile app development services to
-                  turn your business app dreams into reality with a proficient
-                  custom iOS app development team.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-col lg:flex-row bg-[#ffdadb] rounded-lg shadow-lg p-6 gap-4 items-center">
-              <Image
-                src={service2}
-                width={400}
-                height={400}
-                alt="Android app development service illustration"
-                className="w-full sm:w-40"
-              />
-              <div className="text-center sm:text-left text-[#6a6a8e]">
-                <h4 className="text-2xl font-bold mb-2 text-[#050748]">
-                  Android App Development
-                </h4>
-                <p className="text-lg">
-                  Powering 2 billion mobile devices globally, Android remains
-                  one of the most sought-after platforms for mobile app
-                  development.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-col lg:flex-row bg-[#d6edff] rounded-lg shadow-lg p-6 gap-4 items-center">
-              <Image
-                src={service3}
-                width={400}
-                height={400}
-                alt="Cross platform app development service illustration"
-                className="w-full sm:w-40"
-              />
-              <div className="text-center sm:text-left text-[#6a6a8e]">
-                <h4 className="text-2xl font-bold mb-2 text-[#050748]">
-                  Cross Platform App Development
-                </h4>
-                <p className="text-lg">
-                  Need an app for your business that runs seamlessly across
-                  Android and iPhone yet fits budget constraints? We've got you
-                  covered.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-col lg:flex-row bg-[#ffede1] rounded-lg shadow-lg p-6 gap-4 items-center">
-              <Image
-                src={service4}
-                width={400}
-                height={400}
-                alt="Mobile app testing service illustration"
-                className="w-full sm:w-40"
-              />
-              <div className="text-center sm:text-left text-[#6a6a8e]">
-                <h4 className="text-2xl font-bold mb-2 text-[#050748]">
-                  Mobile App Testing
-                </h4>
-                <p className="text-lg">
-                  We provide professional web and mobile app testing solutions
-                  to ensure quality and performance for all your applications.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-20 flex flex-col lg:flex-row justify-center items-center gap-5">
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl text-[#050748]">
-              Hire a <span className="font-bold">Dedicated Developer</span>
-            </h3>
-            <a
-              href="#"
-              className="flex items-center border-2 border-black text-black px-8 py-2 font-poppins text-base bg-white shadow-md rounded-full hover:bg-gradient-to-r from-teal-400 to-indigo-700 hover:text-white hover:border-current"
-            >
-              Hire Now <FaAngleRight className="ml-2" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <div className="py-20 px-5 md:px-10 lg:px-40 z-10">
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          <span className="text-lg text-[#e60072] uppercase">Process</span>
-          <h2 className="text-4xl font-bold mt-4 text-[#050748]">
-            Our Services
-          </h2>
-          <p className="text-lg mt-2 text-[#6a6a8e]">
-            We think big and have hands in all leading technology platforms to
-            provide you wide array of services.
-          </p>
-        </div>
-
-        {[
-          {
-            id: 1,
-            title: "Installation Testing",
-            desc: "We at FST are checking that software application is successfully installed and working as per expectation. This is most important testing phase and we understand this fact. With the use of required tools, devices and equipment we are bringing best of FineSoft.",
-            img: mission,
-            alt: "Mobile app testing process illustration",
-          },
-          {
-            id: 2,
-            title: "Functional Testing",
-            desc: "Functional testing is a key component for improving the nature of the created programming. The dangers of discharging another item without thorough quality affirmation. It has more noteworthy ramifications now than any time in recent memory in light of the regularly changing desires and requests of the end clients. Discovering free QA and testing merchants, is essential to the accomplishment of a quality item. At FST, we esteem this, and being an autonomous programming testing organization empowers us to report the straightforward view. Our goal is to quantify the execution nature of the functional parts.",
-            img: vision1,
-            alt: "Functional testing process illustration",
-          },
-          {
-            id: 3,
-            title: "Usability Testing",
-            desc: "Our usability testing administrations spread both web and mobile versions of applications and incorporates tests. For example, screen resolution checks, compatibility crosswise over gadgets, OS and frameworks working, A/B testing, among-st others to guarantee conformance to framework prerequisites as well as more significantly to client desires. So FST has assembled a mobile usability testing technique depending on our involvement with a wide scope of our customers and our great experience.",
-            img: vision2,
-            alt: "Usability testing process illustration",
-          },
-          {
-            id: 4,
-            title: "Cloud Testing",
-            desc: "We broadly work with a few cloud contributions including a portion of the main ones, for example, Amazon EC2, Microsoft Azure. We have utilized the cloud for a few of our customer assignments for zones, for example, useful, execution, similarity, globalization testing. At FST, cloud testing is a significant territory of enthusiasm for progressing innovative work (R&D) and we ensure maximum ROI for Client’s business.",
-            img: vision3,
-            alt: "Cloud testing process illustration",
-          },
-          {
-            id: 5,
-            title: "Cross Platform (Hybrid) Testing",
-            desc: "To guarantee the ideal similarity of a portable application with different stages, for example, Windows, Android, iOS, Linux, MacOS, and so forth. Our versatile application analyzers perform Cross-Platform testing that incorporates both mechanized and manual QA approaches.",
-            img: vision4,
-            alt: "Cross platform testing process illustration",
-          },
-          {
-            id: 6,
-            title: "Security Testing",
-            desc: "In this era of web and internet, data security is one of the prime worries for every advanced application. Security testing is directed to locate every single potential escape clause and shortcomings in the application at the soonest and enables the advancement. We at FST have a devoted and capable security testing group experienced in both open source and business apparatuses. As a result we take on Security and Penetration testing from beginning periods of the SDLC to avoid the loopholes in application.",
-            img: vision5,
-            alt: "Security testing process illustration",
-          },
-          {
-            id: 7,
-            title: "Performance Testing",
-            desc: "One of the hardest challenges the companies are facing today includes accomplishing and keeping up their business’ central goal; basic applications at pinnacle performance and adaptability levels. Without a successful philosophy for anticipating framework conduct and performance under genuine pressure conditions. They are presented to the sorts of disastrous log jams and disappointments, therefore it cripple efficiency, head out clients and destroy the organization’s main concern. The need of great importance has in this manner, become a successful programming performance testing exertion to defeat such difficulties.",
-            img: vision6,
-            alt: "Performance testing process illustration",
-          },
-        ].map((step, index) => (
-          <div
-            key={step.id}
-            className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16 items-center"
-          >
-            <div
-              className={`md:col-span-4 ${index % 2 !== 0 ? "md:order-2" : ""}`}
-            >
-              <Image
-                src={step.img}
-                width={400}
-                height={400}
-                className="w-full h-auto rounded-lg mx-auto shadow-2xl"
-                alt={step.alt}
-              />
-            </div>
-            <div
-              className={`md:col-span-8 mt-5 md:mt-0 ${
-                index % 2 !== 0 ? "md:order-1 text-right md:text-left" : ""
-              }`}
-            >
-              <span className="inline-block py-3 px-6 text-3xl sm:text-4xl bg-[#f5f5ff] shadow-sm text-[#6a6a8e] rounded-full">
-                {step.id}
-              </span>
-              <h3 className="text-3xl sm:text-4xl font-bold text-[#050748] mt-6">
-                {step.title}
-              </h3>
-              <p className="text-lg text-[#6a6a8e] mt-3">{step.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <ChooseFuture />
-
-      <GetNewInsight />
-
-     
-    </>
+    <ServicePageTemplate
+      hero={{
+        badge: "Mobile Application Testing Services",
+        title: "Ensure Your App is",
+        highlight: "Flawless & Reliable",
+        description:
+          "Future IT Touch is an eminent Mobile Application Testing organization offering comprehensive testing for iOS and Android apps. With certified testers, we cover functional, usability, cloud, security, and cross-platform testing.",
+        image: devops,
+        primaryCta: { label: "Get App Testing Quote", href: "/contact" },
+        secondaryCta: { label: "Call: 7056937000", href: "tel:+917056937000" },
+        trustItems: ["500+ Apps Tested", "15+ Years Expertise", "99.9% Uptime SLA"],
+      }}
+      intro={{
+        badge: "Comprehensive Mobile App QA Services",
+        title: "Why Choose FTS",
+        highlight: "for Mobile App Testing?",
+        description:
+          "At Future IT Touch we test applications for functionality, usability, consistency, and compatibility — ensuring longer stability and reliable performance for your users across all platforms and devices.",
+        ctaLabel: "Get App Testing Quote",
+        ctaHref: "tel:+917056937000",
+      }}
+      features={{
+        badge: "End-to-End Mobile App Testing",
+        title: "Comprehensive Testing Services for Flawless App Performance",
+        image: devops,
+        items: features,
+      }}
+      benefits={{
+        title: "Trusted Mobile App Testing Company in India",
+        subtitle: "Delivering Quality Assurance with Precision & Reliability",
+        items: businessData,
+      }}
+      platforms={{
+        title: "Mobile App Testing Services We Deliver",
+        items: platforms,
+      }}
+      faq={{
+        title: "About Mobile Application Testing",
+        items: faqData,
+      }}
+      cta={CTA_DATA}
+    />
   );
 };
 

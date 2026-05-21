@@ -1,125 +1,187 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
-const skills = [
+const labels = [
+  "React.js Development",
+  "Node.js Development",
+  "Machine Learning",
+  "AI Development",
+  "Frontend Development",
+  "Backend Development",
   "Mobile App Development",
   "Web Development",
-  "Backend Development",
-  "DevOps",
-  "Data Science",
-  "Frontend Development",
-  "Artificial Intelligence",
-  "Digital Marketing",
   "PHP Laravel",
   "Shopify Development",
-  "React.js Development",
-  "Machine Learning",
-  "Node Js Development",
-  "E-commerce Development",
+  "Digital Marketing",
+  "E-Commerce Development",
 ];
 
-const BOX_WIDTH = 270; // estimated pill width
-const BOX_HEIGHT = 90; // estimated pill height
+const PILL_W = 240;
+const PILL_H = 48;
 
 const Heromatterjs = () => {
-  const [screenWidth, setScreenWidth] = useState(0);
-  const [screenHeight, setScreenHeight] = useState(0);
-  const [positions, setPositions] = useState([]);
+  const sceneRef = useRef(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setScreenWidth(window.innerWidth);
-      setScreenHeight(window.innerHeight);
+    if (!sceneRef.current) return;
 
-      // initial random drop positions
-      setPositions(
-        skills.map(() => ({
-          x: Math.random() * (window.innerWidth - BOX_WIDTH),
-          y: Math.random() * (window.innerHeight - BOX_HEIGHT),
-        }))
-      );
+    let Matter;
+    try {
+      Matter = require("matter-js");
+    } catch {
+      return;
     }
-  }, []);
 
-  const handleDrag = (index, event, info) => {
-    const newPositions = [...positions];
-    newPositions[index] = {
-      x: Math.min(
-        Math.max(info.point.x - BOX_WIDTH / 2, 0),
-        screenWidth - BOX_WIDTH
-      ),
-      y: Math.min(
-        Math.max(info.point.y - BOX_HEIGHT / 2, 0),
-        screenHeight - BOX_HEIGHT
-      ),
-    };
+    const { Engine, Render, Runner, Bodies, Composite, Mouse, MouseConstraint, Events, World } = Matter;
 
-    // check collisions
-    newPositions.forEach((pos, i) => {
-      if (i !== index) {
-        const dx = newPositions[index].x - pos.x;
-        const dy = newPositions[index].y - pos.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+    const engine = Engine.create();
+    const world = engine.world;
 
-        if (distance < BOX_WIDTH * 0.8) {
-          // push only left/right (X-axis)
-          if (dx > 0) {
-            // dragged box is to the right → push other left
-            newPositions[i].x = Math.max(pos.x - 20, 0);
-          } else {
-            // dragged box is to the left → push other right
-            newPositions[i].x = Math.min(pos.x + 20, screenWidth - BOX_WIDTH);
-          }
-        }
-      }
+    const W = sceneRef.current.offsetWidth || window.innerWidth;
+    const H = 420;
+
+    const render = Render.create({
+      element: sceneRef.current,
+      engine,
+      options: {
+        width: W,
+        height: H,
+        background: "transparent",
+        wireframes: false,
+      },
     });
 
-    setPositions(newPositions);
-  };
+    Render.run(render);
+    const runner = Runner.create();
+    Runner.run(runner, engine);
+
+    /* Walls */
+    const floor = Bodies.rectangle(W / 2, H + 20, W + 100, 40, { isStatic: true, render: { fillStyle: "transparent" } });
+    const wallL = Bodies.rectangle(-10, H / 2, 20, H * 2, { isStatic: true, render: { fillStyle: "transparent" } });
+    const wallR = Bodies.rectangle(W + 10, H / 2, 20, H * 2, { isStatic: true, render: { fillStyle: "transparent" } });
+    Composite.add(world, [floor, wallL, wallR]);
+
+    /* Drop pills */
+    labels.forEach((text, i) => {
+      const x = 80 + Math.random() * Math.max(0, W - 160);
+      const y = -60 - i * 60;
+
+      const body = Bodies.rectangle(x, y, PILL_W, PILL_H, {
+        chamfer: { radius: 24 },
+        restitution: 0.3,
+        friction: 0.5,
+        render: {
+          fillStyle: "rgba(245, 243, 255, 0.92)",
+          strokeStyle: "#7c3aed",
+          lineWidth: 2,
+        },
+      });
+
+      body.labelText = text;
+      Composite.add(world, body);
+    });
+
+    /* Mouse drag */
+    const mouse = Mouse.create(render.canvas);
+    const mc = MouseConstraint.create(engine, {
+      mouse,
+      constraint: { stiffness: 0.2, render: { visible: false } },
+    });
+    Composite.add(world, mc);
+    render.mouse = mouse;
+
+    /* Draw text labels after each render frame */
+    Events.on(render, "afterRender", () => {
+      const ctx = render.context;
+      if (!ctx) return;
+
+      ctx.font = "bold 13px Inter, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      world.bodies.forEach((body) => {
+        if (!body.labelText) return;
+        ctx.save();
+        ctx.translate(body.position.x, body.position.y);
+        ctx.rotate(body.angle);
+        ctx.fillStyle = "#5b21b6";
+        ctx.fillText(body.labelText, 0, 0);
+        ctx.restore();
+      });
+    });
+
+    /* Resize handler */
+    const onResize = () => {
+      const newW = sceneRef.current?.offsetWidth || window.innerWidth;
+      render.canvas.width = newW;
+      render.options.width = newW;
+      Render.setPixelRatio(render, window.devicePixelRatio);
+    };
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      Render.stop(render);
+      Runner.stop(runner);
+      World.clear(world, false);
+      Engine.clear(engine);
+      if (render.canvas) render.canvas.remove();
+      render.textures = {};
+    };
+  }, []);
 
   return (
-    <section className="mt-5 px-10 max-md:hidden choose-background">
-     <div className='content text-center'>
-
-        <h3 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl mt-5 mb-3 font-bold my-5">
-          <span
-            className=" text-4xl mb-5 bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text tracking-widest "
-            style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
-          >
-            Grow Your Business <br />
-          </span>
-          With Our
-          <span className="bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent leading-normal bg-clip-text ml-2">
+    <section className="py-20 px-4 sm:px-6 md:px-12 xl:px-28 bg-white border-t border-gray-100">
+      {/* Heading */}
+      <div className="text-center mb-10">
+        <span
+          className="text-4xl bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text tracking-widest block mb-2"
+          style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
+        >
+          Grow Your Business
+        </span>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-2">
+          With Our{" "}
+          <span className="bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text">
             Expertise
           </span>
-        </h3>
-
+        </h2>
+        <p className="mt-3 text-gray-500 text-base max-w-xl mx-auto">
+          Toss, drag and drop the technologies we master — every skill built to
+          power your digital success.
+        </p>
       </div>
 
-    <div className="relative w-full h-[50vh] overflow-hidden ">
-      {positions.length > 0 &&
-        skills.map((skill, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-80 text-center py-3 text-base rounded-full border-2 border-teal-400 text-[#6248f9] font-bold bg-white/80 backdrop-blur-sm cursor-grab active:cursor-grabbing shadow-md"
-            initial={{ y: -100, opacity: 0 }}
-            animate={{
-              x: positions[i].x,
-              y: positions[i].y,
-              opacity: 1,
-            }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            drag
-            dragMomentum={false}
-            onDrag={(e, info) => handleDrag(i, e, info)}
-            whileTap={{ scale: 1.1 }}
+      {/* Mobile: static pill grid */}
+      <div className="md:hidden flex flex-wrap justify-center gap-3">
+        {labels.map((skill) => (
+          <span
+            key={skill}
+            className="text-sm font-semibold text-violet-700 bg-violet-50 border border-violet-200 px-4 py-2 rounded-full"
           >
             {skill}
-          </motion.div>
+          </span>
         ))}
-    </div>
+      </div>
+
+      {/* Desktop: Matter.js physics canvas */}
+      {/* <div
+        className="hidden md:block relative w-full rounded-3xl p-5 overflow-hidden border border-violet-100 bg-gradient-to-br from-violet-50/60 to-indigo-50/40 select-none"
+        style={{ height: 420 }}
+      > */}
+        {/* Dot grid */}
+        <div
+          className="absolute inset-0 opacity-30 pointer-events-none"
+          style={{
+            backgroundImage: "radial-gradient(circle, #c4b5fd 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
+        {/* Matter canvas mounts here */}
+        <div ref={sceneRef} className="relative inset-0 w-full h-full" />
+        
+      {/* </div> */}
     </section>
   );
 };

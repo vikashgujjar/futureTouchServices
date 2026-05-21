@@ -1,233 +1,175 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
-import { useState, useEffect } from "react";
+
+const services = [
+  {
+    icon: "/Assets/data.webp",
+    gradient: "from-violet-600 to-indigo-600",
+    bg: "bg-violet-50",
+    title: "Web Development",
+    href: "/website-design",
+    description:
+      "Future-ready websites built for performance, branding, and growth across all verticals.",
+    tags: [
+      { label: "PHP", href: "/php-laravel-codeigniter-services" },
+      { label: ".Net", href: "/asp-dot-net-service" },
+      { label: "Java", href: "/java-application-development" },
+      { label: "React JS", href: "/reactjs-vuejs-nodejs-development-services" },
+    ],
+  },
+  {
+    icon: "/Assets/shopping-cart.webp",
+    gradient: "from-emerald-500 to-teal-600",
+    bg: "bg-emerald-50",
+    title: "Ecommerce Development",
+    href: "/ecommerce-website-development",
+    description:
+      "Cutting-edge ecommerce solutions on the latest technology for maximum conversions and revenue.",
+    tags: [
+      { label: "Magento", href: "/wordpress-and-shopify-development" },
+      { label: "Shopify", href: "/wordpress-and-shopify-development" },
+      { label: "Laravel", href: "/php-laravel-codeigniter-services" },
+    ],
+  },
+  {
+    icon: "/Assets/app-development.webp",
+    gradient: "from-blue-500 to-cyan-500",
+    bg: "bg-blue-50",
+    title: "Mobile App Development",
+    href: "/application-developement",
+    description:
+      "Native and cross-platform mobile apps for Android and iOS that users love to use.",
+    tags: [
+      { label: "iPhone", href: "/ios-application-development" },
+      { label: "Android", href: "/android-application-development" },
+      { label: "Cross Platform", href: "/hybrid-application-development" },
+    ],
+  },
+  {
+    icon: "/Assets/future.webp",
+    gradient: "from-orange-500 to-amber-500",
+    bg: "bg-orange-50",
+    title: "Trending Technologies",
+    href: "/trending-technology",
+    description:
+      "Innovative product development with React, Node.js, Angular, and the latest next-gen tech stack.",
+    tags: [
+      { label: "React.js", href: "/reactjs-vuejs-nodejs-development-services" },
+      { label: "Node.js", href: "/reactjs-vuejs-nodejs-development-services" },
+      { label: "Angular", href: "/angularjs-development-service" },
+    ],
+  },
+  {
+    icon: "/Assets/marketing.webp",
+    gradient: "from-pink-500 to-rose-600",
+    bg: "bg-pink-50",
+    title: "Digital Marketing",
+    href: "/digital-marketing-service",
+    description:
+      "Data-driven SEO, PPC, SMM, and content strategies that drive real, measurable business growth.",
+    tags: [
+      { label: "SEO", href: "/search-engine-optimization" },
+      { label: "PPC", href: "/pay-per-click-service" },
+      { label: "SMM", href: "/social-media-marketing-service" },
+    ],
+  },
+  {
+    icon: "/Assets/marketing.webp",
+    gradient: "from-purple-500 to-violet-700",
+    bg: "bg-purple-50",
+    title: "Design & Branding",
+    href: "/graphic-design-services",
+    description:
+      "From logo design to animated 2D/3D videos — complete creative branding that makes you unforgettable.",
+    tags: [
+      { label: "Logo Design", href: "/logo-design-services" },
+      { label: "Brochure", href: "/brochure-design-service" },
+      { label: "2D/3D Video", href: "/animated-services" },
+    ],
+  },
+];
 
 export default function Service() {
-  const [expandedIndex, setExpandedIndex] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const handleDescriptionClick = (idx) => {
-    if (!isMobile) return;
-    setExpandedIndex(expandedIndex === idx ? null : idx);
-  };
-
-  const servicesData = [
-    {
-      icon: "/Assets/data.webp",
-      title: "Web Development",
-      linkhead: "",
-      number: "01",
-      description:
-        "Your business can get a reliable facelift for long-term branding solutions across all verticals including e-commerce solutions and open source content management exclusively at Future IT Touch Pvt. Ltd.",
-
-      headinglink: "/website-design",
-      courseone: "PHP",
-      cousefive: "Node Js",
-      cousesix: "Laravel",
-      couseseven: "React js",
-      coursetwo: ".Net",
-      coursethree: "Java",
-
-      linksix: "/php-laravel-codeigniter-services",
-      hoverImage: "/Assets/hero-about-1.webp",
-      linktwo: "/php-laravel-codeigniter-services",
-      linkthree: "/asp-dot-net-service",
-      linkfour: "/reactjs-vuejs-nodejs-development-services",
-
-      linksix: "/java-application-development",
-      linkfive: "/wordpress-and-shopify-development",
-    },
-    {
-      icon: "/Assets/shopping-cart.webp",
-      title: "Ecommerce Development",
-      headinglink: "/ecommerce-website-development",
-      number: "02",
-      description:
-        "IT is Link long established fact that Link reader will be distracted by the readable content of Link page when looking at its layout Future IT Touch Pvt. Ltd., we deliver cutting edge technology solutions for online commerce industry. Our ecommerce solutions are built on latest technology.",
-
-      heading: "Ecommerce Development",
-      courseone: "Magento",
-      coursetwo: "WP",
-      coursethree: "Shopify",
-      linksix: "/wordpress-and-shopify-development",
-      coursefour: "Laravel",
-      linktwo: "/wordpress-and-shopify-development",
-      linkthree: "/wordpress-and-shopify-development",
-      linkfour: "/wordpress-and-shopify-development",
-      linkfive: "/php-laravel-codeigniter-services",
-    },
-    {
-      icon: "/Assets/app-development.webp",
-      title: "Mobile App Development",
-      headinglink: "/application-developement",
-      number: "03",
-      description:
-        "Transform and mobilize your business anytime, anywhere with custom mobile app development services from Future IT Touch Pvt. Ltd. India.",
-
-      heading: "Mobile App Development",
-      courseone: "Iphone",
-      coursetwo: "Android",
-      coursethree: "Cross Platform",
-      linksix: "/hybrid-application-development",
-      linktwo: "/ios-application-development",
-      linkthree: "/android-application-development",
-      linkfour: "/hybrid-application-development",
-    },
-    {
-      icon: "/Assets/future.webp",
-
-      title: "Trending Technologies",
-      headinglink: "/application-developement",
-      number: "03",
-      description:
-        "Future IT Touch Pvt. Ltd. India, we create winning business models through innovative product development practices. Committed to delivering the right value.",
-
-      heading: "Mobile App Development",
-      courseone: "react.js",
-      coursetwo: "Node.js",
-      coursethree: "angular.js",
-      linksix: "/reactjs-vuejs-nodejs-development-services",
-      linktwo: "/reactjs-vuejs-nodejs-development-services",
-      linkthree: "/reactjs-vuejs-nodejs-development-services",
-      linkfour: "/reactjs-vuejs-nodejs-development-services",
-    },
-    {
-      icon: "/Assets/marketing.webp",
-      title: "Digital Marketing",
-      headinglink: "/digital-marketing-service",
-
-      number: "03",
-      description:
-        "Digital marketing is the best way to reach your audiences and create relationships with your client. We provide all types of digital marketing tools like PPC, SMO, SEO, SMM for example Google Ads and Facebook Ads.",
-
-      heading: "Mobile App Development",
-      courseone: "seo",
-      coursetwo: "cms",
-      coursethree: "ppc",
-      coursefour: "smm",
-      linktwo: "/search-engine-optimization",
-      linkthree: "/cms-development",
-      linksix: "/pay-per-click-service",
-      linkfive: "/social-media-marketing-service",
-    },
-  ];
-
   return (
-    <div>
-      <div className="m-0 sm:m-0 md:m-5 lg:m-10">
-        <div className="relative">
-          <div className="w-full sm:w-full md:w-full  lg:w-1/2 pl-5 pt-0 sm:pt-0 md:pt-2 lg:pt-5 sm:pl-5 md:pl-6 lg:pl-12 xl:pl-28 ">
-            <span
-              className=" text-4xl mb-8 bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text tracking-widest"
-              style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
-            >
-              Our Services
-            </span>
-            <h3 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl mt-5 mb-8 font-bold">
-              We Empower Clients <br /> To{" "}
-              <span className="bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent leading-normal bg-clip-text">
-                Be Loved
-              </span>
-            </h3>
-          </div>
-        </div>
-        <ul className="divide-y px-2 sm:px-2 md:px-12 xl:px-28 custom-divide-gray">
-          {servicesData.map((service, index) => (
-            <li
-              key={index}
-              className="services-list-item grid max-sm:block grid-cols-2 py-8 relative hover:overflow-visible"
-            >
-              <div className="flex max-sm:block max-md:block max-lg:block card-data">
-                <Image
-                  className="w-16 h-16 mr-14"
-                  src={service.icon}
-                  width={400}
-                  height={400}
-                  alt={service.title + " icon"}
-                  width={64}
-                  height={64}
-                />
-                <h3 className="font-semibold ">
-                  <Link
-                    className="text-2xl sm:text-2xl md:text-2xl lg:text3xl bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text"
-                    href={service.headinglink}
-                  >
-                    {service.title}
-                  </Link>
-                  <ul className="service-list flex mt-4 mb-3 uppercase">
-                    <li className="border-r-2 text-nowrap border-gray-300 px-2">
-                      <Link href={service.linktwo}>{service.courseone}</Link>
-                    </li>
-                    <li className="border-r-2 text-nowrap border-gray-300 px-2">
-                      <Link href={service.linkthree}>{service.coursetwo}</Link>
-                    </li>
-
-                    {service.cousesix ? (
-                      <>
-                        <li className="border-r-2 text-nowrap border-gray-300 px-2">
-                          <Link href={service.linkthree}>
-                            {service.cousesix}
-                          </Link>
-                        </li>
-                      </>
-                    ) : (
-                      ""
-                    )}
-
-                    {service.cousefive ? (
-                      <>
-                        <li className="border-r-2 text-nowrap border-gray-300 px-2">
-                          <Link href={service.linkfour}>
-                            {service.cousefive}
-                          </Link>
-                        </li>
-                      </>
-                    ) : (
-                      ""
-                    )}
-
-                    <li className="border-r-2 text-nowrap border-gray-300 px-2">
-                      <Link href={service.linksix}>{service.coursethree}</Link>
-                    </li>
-                    {service.coursefour && service.linkfive && (
-                      <li className="pl-2">
-                        <Link href={service.linkfive}>
-                          {service.coursefour}
-                        </Link>
-                      </li>
-                    )}
-                  </ul>
-                </h3>
-              </div>
-              <div className="flex gap-2 w-full sm:w-full md:w-full lg:w-10/12">
-                <p
-                  className={`text-gray-600 text-lg mb-8 font-small text-justify ${
-                    isMobile
-                      ? expandedIndex === index
-                        ? ""
-                        : "line-clamp-2"
-                      : "line-clamp-2 hover:line-clamp-none"
-                  }`}
-                  style={{ cursor: isMobile ? "pointer" : "default" }}
-                  onClick={() => handleDescriptionClick(index)}
-                >
-                  {service.description}
-                </p>
-                <FaArrowRight className="absolute w-10 h-10 top-10 sm:top:10 max-lg:hidden md:top-12 lg:top:14 right-7" />
-              </div>
-            </li>
-          ))}
-        </ul>
+    <section className="py-20 px-4 sm:px-6 md:px-12 xl:px-28 bg-white">
+      <div className="text-center mb-14">
+        <span
+          className="text-4xl bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text tracking-widest block mb-2"
+          style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
+        >
+          Our Services
+        </span>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-2 mb-4">
+          We Empower Clients{" "}
+          <span className="bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text">
+            To Be Loved
+          </span>
+        </h2>
+        <p className="text-gray-500 max-w-2xl mx-auto text-lg">
+          We think big and have hands in all leading technology platforms to
+          provide you a wide array of services.
+        </p>
       </div>
-    </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((s) => (
+          <div
+            key={s.title}
+            className="group bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+          >
+            <div
+              className={`w-14 h-14 ${s.bg} rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-200`}
+            >
+              <Image
+                src={s.icon}
+                width={32}
+                height={32}
+                alt={s.title}
+                className="w-8 h-8 object-contain"
+              />
+            </div>
+
+            <h3
+              className={`text-xl font-bold mb-3 bg-gradient-to-r ${s.gradient} text-transparent bg-clip-text`}
+            >
+              {s.title}
+            </h3>
+
+            <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-5">
+              {s.description}
+            </p>
+
+            <div className="flex flex-wrap gap-2 mb-5">
+              {s.tags.map((tag) => (
+                <Link
+                  key={tag.label}
+                  href={tag.href}
+                  className="text-xs font-semibold text-violet-700 bg-violet-50 hover:bg-violet-100 px-3 py-1 rounded-full transition-colors"
+                >
+                  {tag.label}
+                </Link>
+              ))}
+            </div>
+
+            <Link
+              href={s.href}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-violet-600 group-hover:gap-3 transition-all"
+            >
+              Explore More <FaArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        ))}
+      </div>
+
+      <div className="text-center mt-12">
+        <Link
+          href="/service"
+          className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-8 py-3.5 rounded-full font-semibold hover:shadow-lg hover:shadow-violet-200 hover:-translate-y-0.5 transition-all duration-200"
+        >
+          View All Services <FaArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
+    </section>
   );
 }

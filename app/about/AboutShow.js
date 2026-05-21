@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 
 import Image from "next/image";
@@ -13,7 +13,7 @@ export default function AboutShow() {
 
       <div className="hero-about block mt-10 sm:mt-10 md:mt-16 lg:mt-20 px-5  relative sm:px-5 md:px-10 lg:px-20  sm:block md:block lg:flex ">
         <div className="relative flex w-11/12 sm:w-11/12 md:full lg:w-1/2 ">
-          <div className="w-60 h-32 sm:h-32 md:h-40 lg:h-60 bg-teal-400 rounded-full padding-about relative zoom-pulse">
+          <div className="w-60 h-32 sm:h-32 md:h-40 lg:h-60 bg-violet-600 rounded-full padding-about relative zoom-pulse">
             <Image
               className="w-full h-full p-2 sm:p-2 md:p-3 lg:p-5 bg-white rounded-full object-cover "
               src={"/Assets/vinod.webp"}
@@ -53,7 +53,7 @@ export default function AboutShow() {
               </div>
             </div>
           </div>
-          <div className="w-96 h-48 sm:h-48 md:h-52 lg:h-96 bg-gradient-to-r from-teal-400 to-indigo-700 rounded-full padding-about top-40 zoom-pulse relative">
+          <div className="w-96 h-48 sm:h-48 md:h-52 lg:h-96 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full padding-about top-40 zoom-pulse relative">
             <Image
               className="shape-1 h-60 w-60 -z-50 absolute "
               src={"/Assets/about2-shape-1.webp"}
@@ -88,14 +88,14 @@ export default function AboutShow() {
             alt="About BG 2"
           />
           <span
-            className=" text-4xl mb-8 bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text tracking-widest"
+            className=" text-4xl mb-8 bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text tracking-widest"
             style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
           >
             About Us
           </span>
           <h3 className="text-3xl  sm:text-3xl md:text-4xl lg:text-5xl my-3 sm:my-3 md:my-4 lg:my-5   font-bold">
             About{" "}
-            <span className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl  mb-4 sm:mb-4 md:mb-6 lg:mb-8  font-bold bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text">
+            <span className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl  mb-4 sm:mb-4 md:mb-6 lg:mb-8  font-bold bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text">
               Agency
             </span>
           </h3>

@@ -1,106 +1,173 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { FaArrowRight, FaPhone, FaCheckCircle, FaStar } from "react-icons/fa";
 
-import sliderImg3 from "../Assets/slider-img-3.webp";
-import newimg from "../Assets/newimg.webp";
+const slides = [
+  {
+    badge: "Award-Winning IT Company",
+    heading: "Excellent Website Design &",
+    headingHighlight: "Development Services",
+    description:
+      "Crafting unforgettable online experiences through exceptional website design and development — every detail tailored for a one-of-a-kind digital presence.",
+    image: "/images/HeroSection/slider-img-1.webp",
+  },
+  {
+    badge: "Digital Marketing Experts",
+    heading: "Grow Your Business Online with",
+    headingHighlight: "Professional Digital Marketing",
+    description:
+      "Improve your website visibility in search engines with White Hat SEO, PPC, Social Media Marketing, and content strategies that deliver measurable results.",
+    image: "/images/HeroSection/newimg.webp",
+  },
+];
+
+const stats = [
+  { value: "15+", label: "Years Experience" },
+  { value: "5000+", label: "Projects Done" },
+  { value: "250+", label: "Expert Team" },
+  { value: "120+", label: "Countries Served" },
+];
+
+const trust = ["15+ Years Experience", "1200+ Apps Built", "ISO Certified"];
 
 export default function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % contentData.length);
+      setCurrentIndex((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
 
-  const contentData = [
-    {
-      image: "/images/HeroSection/slider-img-1.webp",
-      title: "Excellent Website Design & Development Services",
-      mainText: "Create Unique Design",
-      description:
-        "Crafting unforgettable online experiences through our exceptional website design and development services, where every detail is meticulously tailored to create a one-of-a-kind digital presence",
-    },
-    // {
-    //   image: sliderImg1,
-    //   title: "Excellent IT Services For Your Success",
-    //   mainText: "Crafting Unique Digital .",
-    //   description: "Transform your business with our top-tier app development services. From concept to launch, we deliver apps that drive engagement and success."
-    // },
-    {
-      image: "/images/HeroSection/newimg.webp",
-      title: "Grow Your Business Online with",
-      mainText: "Professional Digital Marketing Services",
-      description:
-        "Improve Your Website Visibility in Search Engine Results Pages and Increase Website Ranking with White Hat SEO Services.",
-    },
-  ];
-
-  const { image, title, mainText, description } = contentData[currentIndex];
+  const slide = slides[currentIndex];
 
   return (
-    <>
-      <div
-        className="hero-main w-full relative h-[440px]   md:h-[500px] lg:h-[700px]"
-        style={{
-          backgroundImage: `url(${image})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          transition: "background-image 1s ease-in-out",
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-black to-transparent mix-blend-multiply"></div>
-        {/* <Navbartwo /> */}
-        <div className="absolute top-60 max-sm:top-28 max-lg:top-40 left-4 sm:left-4 md:left-12 lg:left-28 text-white">
-          <h3
-            className="text-3xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold font-serif tracking-widest"
-            style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
-          >
-            {title}
-          </h3>
-          <h1 className="title text-3xl sm:text-3xl md:text-3xl lg:text-5xl leading-tight pt-4 font-bold">
-            <div>
-              {mainText
-                .split(" ")
-                .map((word, index) =>
-                  index === mainText.split(" ").length - 1 ? (
-                    <span key={index}>{word}</span>
-                  ) : (
-                    `${word} `
-                  )
-                )}
+    <div className="relative overflow-hidden bg-gradient-to-br from-white via-violet-50/60 to-indigo-50/80 min-h-screen flex items-center">
+      {/* Decorative blobs */}
+      <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-violet-100 rounded-full blur-3xl opacity-50 -translate-y-1/3 translate-x-1/3 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100 rounded-full blur-3xl opacity-30 translate-y-1/3 -translate-x-1/4 pointer-events-none" />
+
+      <div className="relative w-full px-4 sm:px-6 md:px-12 xl:px-28 pt-32 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left: content */}
+          <div>
+            <div className="inline-flex items-center gap-2 bg-violet-100 text-violet-700 rounded-full px-4 py-1.5 text-sm font-semibold mb-6">
+              <span className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
+              {slide.badge}
             </div>
-          </h1>
-          <div className="desc pt-5 w-full sm:w-full md:w-full lg:w-6/12">
-            <div>
-              <p className="text-lg font-medium pr-2 ">{description}</p>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+              {slide.heading}{" "}
+              <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+                {slide.headingHighlight}
+              </span>
+            </h1>
+
+            <p className="text-lg text-gray-500 leading-relaxed mb-8 max-w-lg">
+              {slide.description}
+            </p>
+
+            <div className="flex flex-wrap gap-4 mb-10">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-7 py-3.5 rounded-full font-semibold hover:shadow-lg hover:shadow-violet-200 hover:-translate-y-0.5 transition-all duration-200 text-sm"
+              >
+                Get Free Consultation <FaArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                href="tel:+917056937000"
+                className="inline-flex items-center gap-2 border-2 border-gray-200 text-gray-700 px-7 py-3.5 rounded-full font-semibold hover:border-violet-300 hover:text-violet-600 transition-all duration-200 text-sm"
+              >
+                <FaPhone className="w-3.5 h-3.5" /> +91 70569-37000
+              </Link>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              {trust.map((t) => (
+                <span
+                  key={t}
+                  className="inline-flex items-center gap-1.5 text-sm text-gray-600 bg-white border border-gray-200 rounded-full px-3 py-1 shadow-sm"
+                >
+                  <FaCheckCircle className="text-violet-500 w-3.5 h-3.5" /> {t}
+                </span>
+              ))}
             </div>
           </div>
-          <div className="hero-button d-flex">
-            <a
-              href="#scroll-down"
-              className="mt-5 hidden sm:hidden md:hidden lg:block flex items-center w-40 bg-gradient-to-r from-teal-400 to-indigo-700 justify-center bg-black text-white py-4 px-8 font-heading transition duration-400 ease-in-out rounded-md text-lg font-medium focus:outline-none hover:bg-gray-300 hover:bg-gradient-to-r"
-            >
-              Get Started
-            </a>
+
+          {/* Right: image + floating cards */}
+          <div className="relative hidden lg:block">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-violet-100 border border-white">
+              <Image
+                key={currentIndex}
+                src={slide.image}
+                width={640}
+                height={520}
+                alt={slide.heading}
+                className="w-full h-[520px] object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-violet-900/20 via-transparent to-transparent" />
+            </div>
+
+            {/* Floating stat badges */}
+            <div className="absolute -left-8 top-1/3 bg-white rounded-2xl shadow-xl px-5 py-4 border border-gray-100">
+              <p className="text-2xl font-extrabold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+                5000+
+              </p>
+              <p className="text-xs text-gray-500 font-medium whitespace-nowrap">
+                Projects Delivered
+              </p>
+            </div>
+            <div className="absolute -right-6 top-10 bg-white rounded-2xl shadow-xl px-5 py-4 border border-gray-100">
+              <p className="text-2xl font-extrabold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+                250+
+              </p>
+              <p className="text-xs text-gray-500 font-medium whitespace-nowrap">
+                Expert Engineers
+              </p>
+            </div>
+            <div className="absolute right-10 -bottom-6 bg-white rounded-2xl shadow-xl px-5 py-4 border border-gray-100 flex items-center gap-3">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <FaStar key={i} className="text-yellow-400 w-4 h-4" />
+                ))}
+              </div>
+              <div>
+                <p className="text-sm font-bold text-gray-900">4.9 / 5</p>
+                <p className="text-xs text-gray-500">Client Rating</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="absolute top-2/4 right-5 mb-4 flex flex-col items-center">
-          {contentData.map((_, index) => (
+
+        {/* Slide dots */}
+        <div className="flex items-center gap-2 mt-10">
+          {slides.map((_, i) => (
             <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-5 h-5 mb-2 block mx-auto rounded-full focus:outline-none ${
-                currentIndex === index
-                  ? "bg-gradient-to-r from-green-400 to-purple-500"
-                  : "bg-white bg-opacity-60"
+              key={i}
+              onClick={() => setCurrentIndex(i)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                i === currentIndex ? "w-8 bg-violet-600" : "w-2 bg-gray-300"
               }`}
             />
           ))}
         </div>
+
+        {/* Stats strip */}
+        <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-gray-200 pt-10">
+          {stats.map((s) => (
+            <div key={s.label} className="text-center">
+              <p className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+                {s.value}
+              </p>
+              <p className="text-sm text-gray-500 mt-1 font-medium">{s.label}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </>
+    </div>
   );
 }

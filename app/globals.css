@@ -6,6 +6,43 @@ html{
   scroll-behavior: smooth;
 }
 
+/* ── Marquee animations ── */
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marqueeScrollReverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marqueeScroll 35s linear infinite;
+  width: max-content;
+}
+.marquee-track-reverse {
+  display: flex;
+  white-space: nowrap;
+  animation: marqueeScrollReverse 35s linear infinite;
+  width: max-content;
+}
+
+/* ── About progress bars ── */
+@keyframes progressFill {
+  from { width: 0%; }
+  to   { width: var(--target-w); }
+}
+.about-progress-bar {
+  transition: width 1.4s ease-out;
+}
+
+/* ── Stroke text for marquee row 2 ── */
+.stroke-text {
+  -webkit-text-stroke: 1.5px #c4b5fd;
+  color: transparent;
+}
+
 ul.navbar-main li  .icon-change::after {
     position: absolute;
     top: auto;
@@ -15,7 +52,7 @@ ul.navbar-main li  .icon-change::after {
     /* font-family: "Font Awesome 6 Pro"; */
     font-size: 17px;
     transition: all 0.1s ease-in-out 0s;
-    background-image: linear-gradient(90deg, #20d9a1 0%, #5f39ff 100%);
+    background-image: linear-gradient(90deg, #7c3aed 0%, #4f46e5 100%);
     background-clip: text;
     /* -webkit-background-clip: text; */
     color: transparent;
@@ -82,7 +119,7 @@ ul.navbar-main li  .icon-change::after {
   top: -18%;
   height: 130px;
   width: 130px;
-  box-shadow: linear-gradient(90deg, #20d9a1 0%, #5f39ff 100%);
+  box-shadow: linear-gradient(90deg, #7c3aed 0%, #4f46e5 100%);
   background: #ffffff;
 }
 .about-circle-box .ab-circle svg {
@@ -148,12 +185,12 @@ ul.navbar-main li  .icon-change::after {
   -webkit-text-stroke-color: black;
 }
 .custom-divide-gray > li {
-  border-image: linear-gradient(90deg, #20d9a1 0%, #5f39ff 100%);
+  border-image: linear-gradient(90deg, #7c3aed 0%, #4f46e5 100%);
   border-image-slice: 1;
 }
 .button-link {
   border: 1px solid;
-  border-image: linear-gradient(90deg, #20d9a1 0%, #5f39ff 100%);
+  border-image: linear-gradient(90deg, #7c3aed 0%, #4f46e5 100%);
   border-image-slice: 1;
   border-radius: 5px !important;
 }
@@ -205,7 +242,7 @@ ul.navbar-main li  .icon-change::after {
 .Business-domain {
   padding-top: 32px;
   padding-bottom: 55px;
-  background: linear-gradient(90deg, #5f39ff 0%, #20d9a1 100%);
+  background: linear-gradient(135deg, #1a0533 0%, #2d1060 50%, #0f2460 100%);
   position: relative;
   z-index: 1;
 }
@@ -545,7 +582,7 @@ button {
   transition: all 0.5s ease-in-out;
 }
 .active {
-  background: linear-gradient(90deg, #20d9a1 0%, #5f39ff 100%);
+  background: linear-gradient(90deg, #7c3aed 0%, #4f46e5 100%);
   background-clip: text;
   color: transparent;
 }

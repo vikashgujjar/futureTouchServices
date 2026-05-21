@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useEffect } from "react";
 import Image from "next/image";
 
@@ -156,13 +156,13 @@ const OurTeam = () => {
       <div className=" mt-10 px-5 md:px-12 xl:px-28 text-center">
         <h3 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl mt-5 mb-8 font-bold">
           <span
-            className=" text-4xl mb-8 bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text tracking-widest"
+            className=" text-4xl mb-8 bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text tracking-widest"
             style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
           >
             We Are Awesome <br />
           </span>
           Our Team
-          <span className="bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent leading-normal bg-clip-text ml-2">
+          <span className="bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent leading-normal bg-clip-text ml-2">
             Members
           </span>
         </h3>
@@ -196,11 +196,11 @@ const OurTeam = () => {
                   </p>
                 </div>
                 <div className="relative group">
-                  <div className="media-btn p-2 w-10 h-10 my-2 bg-indigo-700 hover:bg-teal-400 text-white rounded">
+                  <div className="media-btn p-2 w-10 h-10 my-2 bg-indigo-700 hover:bg-violet-600 text-white rounded">
                     <FaPlus className="icon-plus text-2xl" />
                   </div>
                   <ul className="social-icons list-inline  absolute bottom-0 transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
-                    <li className="social-facebook p-2 w-10 h-10 my-2  bg-gradient-to-r from-teal-400 to-indigo-700 text-white rounded ">
+                    <li className="social-facebook p-2 w-10 h-10 my-2  bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded ">
                       <a
                         href="https://www.facebook.com/"
                         tabIndex="0"
@@ -210,7 +210,7 @@ const OurTeam = () => {
                         <FaFacebook />
                       </a>
                     </li>
-                    <li className="social-facebook p-2 w-10 h-10 my-2  bg-gradient-to-r from-teal-400 to-indigo-700 text-white rounded ">
+                    <li className="social-facebook p-2 w-10 h-10 my-2  bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded ">
                       <a
                         href="https://twitter.com/"
                         tabIndex="0"
@@ -220,7 +220,7 @@ const OurTeam = () => {
                         <FaTwitter />
                       </a>
                     </li>
-                    <li className="social-facebook p-2 w-10 h-10 my-2  bg-gradient-to-r from-teal-400 to-indigo-700 text-white rounded ">
+                    <li className="social-facebook p-2 w-10 h-10 my-2  bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded ">
                       <a
                         href="https://in.pinterest.com/"
                         tabIndex="0"
@@ -230,7 +230,7 @@ const OurTeam = () => {
                         <FaPinterest />
                       </a>
                     </li>
-                    <li className="social-facebook p-2 w-10 h-10 my-2  bg-gradient-to-r from-teal-400 to-indigo-700 text-white rounded ">
+                    <li className="social-facebook p-2 w-10 h-10 my-2  bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded ">
                       <a
                         href="https://www.instagram.com/"
                         tabIndex="0"

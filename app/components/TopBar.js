@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -24,7 +24,7 @@ function TopBar() {
   const handleMouseLeave = () => setIsOpen(false);
 
   return (
-    <header className="w-full  py-2 px-5 md:p-2 lg:px-5 bg-gradient-to-r from-teal-400 to-indigo-700 text-white grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-2">
+    <header className="w-full  py-2 px-5 md:p-2 lg:px-5 bg-gradient-to-r from-violet-600 to-indigo-600 text-white grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-2">
       <div className="hidden lg:block">
         <div className="header-top-call flex sm:justify-start justify-around lg:justify-start font-bold sm:text-sm">
           <div className="hidden lg:block">

@@ -1,5 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  FaMobileAlt,
+  FaGlobe,
+  FaShoppingCart,
+  FaBolt,
+  FaBullhorn,
+  FaPaintBrush,
+  FaArrowRight,
+  FaPhone,
+  FaCheckCircle,
+} from "react-icons/fa";
+
 import icon1 from "../Assets/startup.webp";
 import icon2 from "../Assets/team.webp";
 import icon3 from "../Assets/mobile.webp";
@@ -25,667 +39,308 @@ import smm from "../Assets/smm.webp";
 import logo from "../Assets/logo.webp";
 import brochure from "../Assets/brochure.webp";
 import video from "../Assets/2d3d.webp";
-import { FaAngleRight } from "react-icons/fa";
-// import Testimonial from "../Hero/Testimonial";
-// import MutipleServices from "../Hero/MutipleServices";
-// import Location from "../Hero/Location";
+
 import Login from "../components/Login";
 import Testimonial from "../components/Testimonial";
 import Location from "../components/Location";
 import MutipleServices from "../components/MutipleServices";
-import Link from "next/link";
 
-import Image from "next/image";
+const stats = [
+  { src: icon1, counter: "20+", text: "Years Experience" },
+  { src: icon2, counter: "250+", text: "Talented Squad" },
+  { src: icon3, counter: "1200+", text: "Apps Developed" },
+  { src: icon4, counter: "5000+", text: "Projects Delivered" },
+  { src: icon5, counter: "120+", text: "Countries Served" },
+  { src: icon6, counter: "100%", text: "Client Satisfaction" },
+];
+
+const serviceCards = [
+  {
+    icon: <FaMobileAlt className="w-6 h-6 text-white" />,
+    title: "App Development",
+    color: "from-violet-600 to-indigo-600",
+    subLinks: [
+      { label: "iPhone", href: "/ios-application-development" },
+      { label: "Android", href: "/android-application-development" },
+      { label: "Cross Platform", href: "/hybrid-application-development" },
+    ],
+    techs: [
+      { src: android, alt: "Android" },
+      { src: apple, alt: "Apple" },
+      { src: tablet, alt: "Hybrid" },
+    ],
+    description:
+      "Transform and mobilize your business anytime, anywhere with custom mobile app development services for Android, iOS & Hybrid platforms.",
+    href: "/application-developement",
+  },
+  {
+    icon: <FaGlobe className="w-6 h-6 text-white" />,
+    title: "Web Development",
+    color: "from-blue-600 to-cyan-500",
+    subLinks: [
+      { label: "Asp.net", href: "/asp-dot-net-service" },
+      { label: "PHP", href: "/php-laravel-codeigniter-services" },
+      { label: "Java", href: "/java-application-development" },
+      { label: "WordPress", href: "/wordpress-and-shopify-development" },
+    ],
+    techs: [
+      { src: svg, alt: "UX" },
+      { src: php, alt: "PHP" },
+      { src: java, alt: "Java" },
+      { src: wordpress, alt: "WordPress" },
+    ],
+    description:
+      "Your business can get a reliable facelift for long-term branding solutions across all verticals including e-commerce and open source CMS.",
+    href: "/website-design",
+  },
+  {
+    icon: <FaShoppingCart className="w-6 h-6 text-white" />,
+    title: "eCommerce Development",
+    color: "from-emerald-500 to-teal-600",
+    subLinks: [
+      { label: "Laravel", href: "/php-laravel-codeigniter-services" },
+      { label: "Magento", href: "/wordpress-and-shopify-development" },
+      { label: "React JS", href: "/reactjs-vuejs-nodejs-development-services" },
+    ],
+    techs: [
+      { src: magento, alt: "Magento" },
+      { src: shopify, alt: "Shopify" },
+      { src: reactjs, alt: "React JS" },
+    ],
+    description:
+      "We deliver cutting edge technology solutions for the online commerce industry. Our ecommerce solutions are built on the latest technology.",
+    href: "/ecommerce-website-development",
+  },
+  {
+    icon: <FaBolt className="w-6 h-6 text-white" />,
+    title: "Trending Technologies",
+    color: "from-orange-500 to-amber-500",
+    subLinks: [
+      { label: "React JS", href: "/reactjs-vuejs-nodejs-development-services" },
+      { label: "Node JS", href: "/reactjs-vuejs-nodejs-development-services" },
+      { label: "Angular", href: "/angularjs-development-service" },
+    ],
+    techs: [
+      { src: reactjs, alt: "React" },
+      { src: nodejs, alt: "Node" },
+      { src: angular, alt: "Angular" },
+    ],
+    description:
+      "We create winning business models through innovative product development practices, committed to delivering the right value.",
+    href: "/trending-technology",
+  },
+  {
+    icon: <FaBullhorn className="w-6 h-6 text-white" />,
+    title: "Digital Marketing",
+    color: "from-pink-500 to-rose-600",
+    subLinks: [
+      { label: "SEO", href: "/search-engine-optimization" },
+      { label: "CMS", href: "/cms-development" },
+      { label: "PPC", href: "/pay-per-click-service" },
+      { label: "SMM", href: "/social-media-marketing-service" },
+    ],
+    techs: [
+      { src: seo, alt: "SEO" },
+      { src: cms, alt: "CMS" },
+      { src: ppc, alt: "PPC" },
+      { src: smm, alt: "SMM" },
+    ],
+    description:
+      "Digital marketing is the best way to reach your audience. We provide all types of digital marketing tools like PPC, SMO, SEO, and SMM.",
+    href: "/digital-marketing-service",
+  },
+  {
+    icon: <FaPaintBrush className="w-6 h-6 text-white" />,
+    title: "Design & Branding",
+    color: "from-purple-500 to-violet-700",
+    subLinks: [
+      { label: "Logo", href: "/logo-design-services" },
+      { label: "Brochure", href: "/brochure-design-service" },
+      { label: "2D/3D Video", href: "/animated-services" },
+    ],
+    techs: [
+      { src: logo, alt: "Logo" },
+      { src: brochure, alt: "Brochure" },
+      { src: video, alt: "Video" },
+    ],
+    description:
+      "We serve all your designing needs: corporate identity, product branding, logo design, brochures, leaflets, animated 2D/3D videos & more.",
+    href: "/graphic-design-services",
+  },
+];
 
 const Services = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const handleButtonClick = () => {
-    setIsPopupOpen(true);
-  };
-
-  const handleClosePopup = () => {
-    setIsPopupOpen(false);
-  };
-
-  const cardsData = [
-    {
-      id: 1,
-      src: icon1,
-      alt: "Industries",
-      text: "Years Experience",
-      bgColor: "bg-[#f3f5ff]",
-      borderColor: "#b0bdff",
-      counter: "20+",
-    },
-    {
-      id: 2,
-      src: icon2,
-      alt: "Industries",
-      text: "Talented Squad",
-      bgColor: "bg-[#fff3e6]",
-      borderColor: "#ffc093",
-      counter: "250+",
-    },
-    {
-      id: 3,
-      src: icon3,
-      alt: "Industries",
-      text: "Apps Developed",
-      bgColor: "bg-[#fbeefd]",
-      borderColor: "#f6bcff",
-      counter: "1200+",
-    },
-    {
-      id: 4,
-      src: icon4,
-      alt: "Industries",
-      text: "Projects Delivered",
-      bgColor: "bg-[#effdff]",
-      borderColor: "#9ff3ff",
-      counter: "100%",
-    },
-    {
-      id: 5,
-      src: icon5,
-      alt: "Industries",
-      text: "Countries Served",
-      bgColor: "bg-[#fbfff1]",
-      borderColor: "#ffdaa2",
-      counter: "120+",
-    },
-    {
-      id: 6,
-      src: icon6,
-      alt: "Industries",
-      text: "Client Satisfaction",
-      bgColor: "bg-[#f3f5ff]",
-      borderColor: "#b0bdff",
-      counter: "100%",
-    },
-  ];
-
   return (
     <>
-      <div className="h-24 max-sm:h-[57px] max-md:h-20 max-lg:h-24 bg-white"></div>
-      <div className=" relative overflow-hidden bg-[#442a79] xl:min-h-96 max-lg:h-auto">
-        <div className="">
-          <div className="px-5 md:px-12 xl:px-28 pt-14 max-sm:py-7 max-lg:py-10 lg:py-10">
-            <h1 className="text-white font-bold text-4xl  max-sm:text-2xl max-lg:text-xl">
-              WEBSITE, MOBILE APP & DIGITAL MARKETING SERVICES
-            </h1>
+      <div className="h-24 max-sm:h-[57px] max-md:h-20 max-lg:h-24 bg-white" />
 
-            <div className="text-[#dcd7f8]  mt-3 text-lg text-justify max-lg:text-base">
-              <p>
-                We are Link full-stack Branding, Website Development, App
-                Development, Digital marketing and web designing company in
-                Chandigarh with all the expertise you need to build Link
-                successful, stable and scalable product. We follow our tried and
-                tested processes that ensures that the product is Link
-                marketfit, and hence your marketing and technology partner.{" "}
-                <span className="font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text animate-hue">
-                  Future IT Touch Pvt. Ltd.
-                </span>{" "}
-                mobile app development & website design company in India offers
-                Link comprehensive range of digital solutions for all your
-                online business needs. Our bouquet of services includes web
-                design and development, mobility solutions, digital marketing,
-                and corporate branding solutions. With our team of 50+
-                designers, developers, content writers, and marketing experts,
-                we have been serving Link global clientele in 3+ countries since
-                2017.
-              </p>
-            </div>
-            <div className="flex gap-3 mt-5">
-              <Link
-                href="/contact"
-                className="flex items-center bg-[#dc3545] justify-center bg-red text-white py-2 px-2 sm:px-8 font-heading transition duration-400 ease-in-out rounded-md text-base font-base focus:outline-none hover:bg-gray-300 hover:bg-gradient-to-r from-teal-400 to-indigo-700"
-              >
-                Quick Enquiry
-              </Link>
-              <button className="flex items-center bg-dark-200 justify-center border text-white py-2 px-2  sm:px-8 font-heading ">
-                <Link href="tel:+917056937000">Call us - 7056937000</Link>
-              </button>
-            </div>
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#1a0533] via-[#2d1060] to-[#0f2460] py-20 sm:py-24">
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-violet-500 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-indigo-400 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2" />
+        </div>
+        <div className="relative px-5 md:px-12 xl:px-28">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 mb-6">
+            <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
+            <span className="text-sm text-violet-200 font-medium">
+              Our Complete Service Portfolio
+            </span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 max-w-4xl">
+            Website, Mobile App &{" "}
+            <span className="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
+              Digital Marketing
+            </span>{" "}
+            Services
+          </h1>
+          <p className="text-lg text-white/70 max-w-3xl mb-8 leading-relaxed">
+            We are a full-stack Branding, Website Development, App Development,
+            Digital Marketing, and Web Designing company in Chandigarh. With a
+            team of 250+ designers, developers, and marketing experts, we have
+            been serving a global clientele since 2017.
+          </p>
+          <div className="flex flex-wrap gap-4 mb-10">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-7 py-3 rounded-full font-semibold hover:shadow-lg hover:shadow-violet-500/30 transition-all"
+            >
+              Quick Enquiry <FaArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="tel:+917056937000"
+              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-7 py-3 rounded-full font-semibold hover:bg-white/20 transition-all"
+            >
+              <FaPhone className="w-4 h-4" /> Call: 7056937000
+            </Link>
+          </div>
+          <div className="flex flex-wrap gap-6 text-sm text-white/60">
+            {[
+              "15+ Years Experience",
+              "1200+ Apps Delivered",
+              "120+ Countries Served",
+            ].map((t) => (
+              <span key={t} className="flex items-center gap-1.5">
+                <FaCheckCircle className="text-violet-400 w-4 h-4" /> {t}
+              </span>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="bg-image mt-5 sm:mt-5 md:mt-7 lg:mt-10 px-5 md:px-12 xl:px-28 pb-10">
-        <div className="grid grid-cols-1 xl:grid-cols-2">
-          <div className="col-lg-5 v-center px-5 sm:px-5 md:px-0 lg:px-0">
-            <div className="common-heading">
-              <h3 className="text-4xl max-sm:text-3xl max-md:text-3xl leading-tight mt-5 mb-5 font-bold">
-                <span className="text-4xl max-sm:text-3xl max-md:text-3xl mt-5 mb-5 font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text">
-                  Future IT Touch Pvt. Ltd. <br />
-                </span>
-                WEBSITE, MOBILE APP & DIGITAL MARKETING SERVICES
-              </h3>
-
-              <p className="text-justify text-lg mt-5">
-                We are a full-stack Branding, Website Development, App
-                Development, Digital Marketing and Web Designing company in
-                Chandigarh with all the expertise you need to build a
-                successful, stable & scalable product. We follow our tried and
-                tested processes that ensure the product is market-fit & hence
-                your marketing and technology partner.
-              </p>
-
-              <p className="text-justify text-lg font-bold text-gray-700 mt-5">
-                You already have a project in mind and want to work with us?
-                Fill out the form below and let us know right away in which
-                direction it should go.
-              </p>
-
-              <div className="cta-card mt-8 text-left pr-0 sm:pr-0 md:pr-0 lg:pr-16">
-                <h3 className="mb-4 text-2xl sm:text-2xl md:text-3xl lg:text-2xl font-bold float-start">
-                  Let's Start a New Project Together
-                </h3>
-
-                <button
-                  onClick={handleButtonClick}
-                  className="btn-outline float-right flex items-center border-2 border-black text-black px-8 py-2 font-poppins text-base bg-white shadow-md rounded-full mt-5 ml-2 hover:bg-gradient-to-r from-teal-400 to-indigo-700 hover:text-white hover:border-current"
-                >
-                  Request A Quote <FaAngleRight className="relative left-2" />
-                </button>
+      {/* Stats */}
+      <section className="py-16 px-5 md:px-12 xl:px-28 bg-white">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+          {stats.map((s, i) => (
+            <div key={i} className="text-center group">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-violet-50 to-indigo-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                <Image
+                  src={s.src}
+                  width={40}
+                  height={40}
+                  alt={s.text}
+                  className="w-9 h-9 object-contain"
+                />
               </div>
+              <p className="text-3xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+                {s.counter}
+              </p>
+              <p className="text-sm text-gray-500 font-medium mt-1">{s.text}</p>
             </div>
-          </div>
-
-          {isPopupOpen && (
-             <Login handleClosePopup={handleClosePopup} isPopupOpen={isPopupOpen} />
-
-          )}
-
-          <div className="col-lg-7">
-            <div className="mx-5 max-sm:mx-2 max-md:mx-4 mt-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
-              {cardsData.map((card) => (
-                <div
-                  key={card.id}
-                  className={`work-cards cd${card.id} ${card.bgColor} h-[14rem] w-44 max-sm:w-40 max-md:w-40 relative inline-block p-10 text-center shadow-lg`}
-                  style={{ borderBottom: `4px solid ${card.borderColor}` }}
-                >
-                  <div className="ml-3">
-                    <Image
-                      className="w-16 h-16 mb-2"
-                      src={card.src}
-                      width={64}
-                      height={64}
-                      alt={card.alt}
-                    />
-                  </div>
-                  <h1 className="text-2xl font-bold text-[#050748]">
-                    {card.counter}
-                  </h1>
-                  <p className="text-center text-[#6a6a8e] mt-2 font-semibold">
-                    {card.text}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
-      </div>
+      </section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12  pb-10">
-        <div className="pt-20 md:col-span-12 text-center">
-          <span
-            className="text-4xl mb-5 bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text tracking-widest"
-            style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
-          >
-            Our Services
-          </span>
-          <p className="text-xl font-semibold text-gray-700 mt-2 p-2">
+      {/* Services Section */}
+      <section className="bg-gray-50 pt-16 pb-20 px-5 md:px-12 xl:px-28">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-violet-100 rounded-full px-4 py-1.5 mb-4">
+            <span className="text-sm text-violet-700 font-semibold">
+              What We Offer
+            </span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Our{" "}
+            <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+              Services
+            </span>
+          </h2>
+          <p className="text-gray-500 max-w-2xl mx-auto text-base">
             We think big and have hands in all leading technology platforms to
-            provide you wide array of services.
+            provide you a wide array of services.
           </p>
         </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  px-5 sm:px-5 md:px-12 xl:px-28  gap-4 mb-20 service-bg ">
-        <div className=" rounded overflow-hidden bg-white py-4 shadow-lg">
-          <div className="px-6 py-4">
-            <h4 className="font-bold text-xl mb-2">App Development</h4>
-            <ul className="text-sm font-semibold text-[#6a6a8e] flex my-3 uppercase">
-              <li className="border-r-2 border-gray-300 pr-2 ">
-                <Link href="/IOS">iphone</Link>
-              </li>
-              <li className="border-r-2 border-gray-300 px-2">
-                <Link href="/android-application-development">android</Link>
-              </li>
-              <li className="border-r-2 text-nowrap border-gray-300 px-2">
-                <Link href="/hybrid-application-development">
-                  cross platform
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {serviceCards.map((card, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col"
+            >
+              <div
+                className={`bg-gradient-to-r ${card.color} p-5 flex items-center gap-3`}
+              >
+                <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+                  {card.icon}
+                </div>
+                <h3 className="text-white font-bold text-lg">{card.title}</h3>
+              </div>
+              <div className="p-6 flex flex-col flex-1">
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {card.subLinks.map((s) => (
+                    <Link
+                      key={s.label}
+                      href={s.href}
+                      className="text-xs font-semibold text-violet-700 bg-violet-50 hover:bg-violet-100 px-3 py-1 rounded-full transition-colors"
+                    >
+                      {s.label}
+                    </Link>
+                  ))}
+                </div>
+                <div className="flex gap-2 mb-5">
+                  {card.techs.map((t, j) => (
+                    <div
+                      key={j}
+                      className="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center p-2"
+                    >
+                      <Image
+                        src={t.src}
+                        width={32}
+                        height={32}
+                        alt={t.alt}
+                        className="object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <p className="text-gray-500 text-sm leading-relaxed flex-1">
+                  {card.description}
+                </p>
+                <Link
+                  href={card.href}
+                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-violet-600 hover:text-indigo-700 group-hover:gap-3 transition-all"
+                >
+                  Explore More <FaArrowRight className="w-3.5 h-3.5" />
                 </Link>
-              </li>
-            </ul>
-            <div className="pt-2">
-              <ul className="flex gap-2">
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={android}
-                      width={400}
-                      height={400}
-                      alt="Android"
-                    />
-                  </Link>
-                </li>
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={apple}
-                      width={400}
-                      height={400}
-                      alt="Apple"
-                    />
-                  </Link>
-                </li>
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-4">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={tablet}
-                      width={400}
-                      height={400}
-                      alt="Tablet"
-                    />
-                  </Link>
-                </li>
-              </ul>
+              </div>
             </div>
-            <p className="text-gray-700 text-base mt-4 text-justify">
-              Transform and mobilize your business anytime, anywhere with custom
-              mobile app development services Android, IOS &amp; Hybrid from
-              Future IT Touch Pvt. Ltd. India.
-            </p>
-          </div>
-          <div className="px-6 py-4">
-            <Link
-              href="/application-developement"
-              className="bg-gradient-to-r from-teal-400 to-indigo-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Read More
-            </Link>
-          </div>
+          ))}
         </div>
-        <div className=" rounded overflow-hidden bg-white shadow-lg py-4">
-          <div className="px-6 py-4">
-            <h4 className="font-bold text-xl mb-2">Web Development</h4>
-            <ul className="text-sm font-semibold text-[#6a6a8e] flex my-3 uppercase">
-              <li className="border-r-2 border-gray-300 pr-2 ">
-                <Link href="/asp-dot-net-service">Asp.net</Link>
-              </li>
-              <li className="border-r-2 border-gray-300 px-2">
-                <Link href="/php-laravel-codeigniter-services">php</Link>
-              </li>
-              <li className="border-r-2 border-gray-300 px-2">
-                <Link href="/java-application-development">java</Link>
-              </li>
-              <li className="border-r-2 border-gray-300 px-2">
-                <Link href="/wordpress-and-shopify-development">Wordpress</Link>
-              </li>
-            </ul>
-            <div className="pt-2">
-              <ul className="flex gap-2">
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={svg}
-                      width={400}
-                      height={400}
-                      alt="Android"
-                    />
-                  </Link>
-                </li>
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={php}
-                      width={400}
-                      height={400}
-                      alt="Apple"
-                    />
-                  </Link>
-                </li>
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={java}
-                      width={400}
-                      height={400}
-                      alt="Tablet"
-                    />
-                  </Link>
-                </li>
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={wordpress}
-                      width={400}
-                      height={400}
-                      alt="Tablet"
-                    />
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <p className="text-gray-700 text-base mt-4 text-justify">
-              Your business can get a reliable facelift for long-term branding
-              solutions across all verticals including e-commerce solutions and
-              open source content management exclusively.
-            </p>
-          </div>
-          <div className="px-6 py-4">
-            <Link
-              href="/website-design"
-              className="bg-gradient-to-r from-teal-400 to-indigo-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Read More <i className="fas fa fa-arrow-circle-right ml-1"></i>
-            </Link>
-          </div>
-        </div>
-        <div className=" rounded overflow-hidden bg-white py-4  shadow-lg">
-          <div className="px-6 py-4">
-            <h4 className="font-bold text-xl mb-2">eCommerce Development</h4>
-            <ul className="text-sm font-semibold text-[#6a6a8e] flex  my-3 uppercase">
-              <li className="border-r-2 border-gray-300 pr-4 ">
-                <Link href="/php-laravel-codeigniter-services">laravel</Link>
-              </li>
-              <li className="border-r-2 border-gray-300 px-4">
-                <Link href="/wordpress-and-shopify-development">magneto</Link>
-              </li>
-              <li className="border-r-2 border-gray-300 px-4">
-                <Link href="/reactjs-vuejs-nodejs-development-services">
-                  react js
-                </Link>
-              </li>
-            </ul>
-            <div className="pt-2">
-              <ul className="flex">
-                <li className="mr-2">
-                  <Link href="#">
-                    <Image
-                      className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3"
-                      src={magento}
-                      width={400}
-                      height={400}
-                      alt="Android"
-                    />
-                  </Link>
-                </li>
-                <li className="mr-2">
-                  <Link href="#">
-                    <Image
-                      className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3"
-                      src={shopify}
-                      width={400}
-                      height={400}
-                      alt="Apple"
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <Image
-                      className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3"
-                      src={reactjs}
-                      width={400}
-                      height={400}
-                      alt="Tablet"
-                    />
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <p className="text-gray-700 text-base mt-4 text-justify">
-              Future IT Touch Pvt. Ltd., we deliver cutting edge technology
-              solutions for online commerce industry. Our ecommerce solutions
-              are built on latest technology.
-            </p>
-          </div>
-          <div className="px-6 py-4">
-            <Link
-              href="/ecommerce"
-              className="bg-gradient-to-r from-teal-400 to-indigo-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Read More <i className="fas fa fa-arrow-circle-right ml-1"></i>
-            </Link>
-          </div>
-        </div>
-        <div className=" rounded overflow-hidden bg-white py-4 shadow-lg">
-          <div className="px-6 py-4">
-            <h4 className="font-bold text-xl mb-2">Trending Technologies</h4>
-            <ul className="text-sm font-semibold text-[#6a6a8e] flex my-3 uppercase">
-              <li className="border-r-2 border-gray-300 pr-2 ">
-                <Link href="/reactjs-vuejs-nodejs-development-services">
-                  React js
-                </Link>
-              </li>
-              <li className="border-r-2 border-gray-300 px-2">
-                <Link href="/reactjs-vuejs-nodejs-development-services">
-                  node js
-                </Link>
-              </li>
-              <li className="border-r-2 border-gray-300 px-2">
-                <Link href="/angularjs-development-service"> angular</Link>
-              </li>
-            </ul>
-            <div className="pt-2">
-              <ul className="flex gap-2">
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={reactjs}
-                      width={400}
-                      height={400}
-                      alt="Android"
-                    />
-                  </Link>
-                </li>
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={nodejs}
-                      width={400}
-                      height={400}
-                      alt="Apple"
-                    />
-                  </Link>
-                </li>
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-4">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={angular}
-                      width={400}
-                      height={400}
-                      alt="Tablet"
-                    />
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <p className="text-gray-700 text-base mt-4 text-justify">
-              Future IT Touch Pvt. Ltd. India, we create winning business models
-              through innovative product development practices. Committed to
-              delivering the right value.
-            </p>
-          </div>
-          <div className="px-6 py-4">
-            <Link
-              href="/trending-technology"
-              className="bg-gradient-to-r from-teal-400 to-indigo-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Read More <i className="fas fa fa-arrow-circle-right ml-1"></i>
-            </Link>
-          </div>
-        </div>
-        <div className=" rounded overflow-hidden bg-white shadow-lg py-4">
-          <div className="px-6 py-4">
-            <h4 className="font-bold text-xl mb-2">Digital marketing</h4>
-            <ul className="text-sm font-semibold text-[#6a6a8e] flex my-3 uppercase">
-              <li className="border-r-2 border-gray-300 pr-2 ">
-                <Link href="/search-engine-optimization">seo</Link>
-              </li>
-              <li className="border-r-2 border-gray-300 px-2">
-                <Link href="/cms">cms</Link>
-              </li>
-              <li className="border-r-2 border-gray-300 px-2">
-                <Link href="/pay-per-click-service">ppc</Link>
-              </li>
-              <li className="border-r-2 border-gray-300 px-2">
-                <Link href="/social-media-marketing-service">smm</Link>
-              </li>
-            </ul>
-            <div className="pt-2">
-              <ul className="flex gap-2">
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={seo}
-                      width={400}
-                      height={400}
-                      alt="Android"
-                    />
-                  </Link>
-                </li>
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={cms}
-                      width={400}
-                      height={400}
-                      alt="Apple"
-                    />
-                  </Link>
-                </li>
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={ppc}
-                      width={400}
-                      height={400}
-                      alt="Tablet"
-                    />
-                  </Link>
-                </li>
-                <li className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3">
-                  <Link href="#">
-                    <Image
-                      className=""
-                      src={smm}
-                      width={400}
-                      height={400}
-                      alt="Tablet"
-                    />
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <p className="text-gray-700 text-base mt-4 text-justify">
-              Digital marketing is the best way to reach your audiences and
-              create relationships with your client. We provide all types of
-              digital marketing tools like PPC, SMO, SEO, SMM.
-            </p>
-          </div>
-          <div className="px-6 py-4">
-            <Link
-              href="/"
-              className="bg-gradient-to-r from-teal-400 to-indigo-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Read More <i className="fas fa fa-arrow-circle-right ml-1"></i>
-            </Link>
-          </div>
-        </div>
-        <div className=" rounded overflow-hidden bg-white py-4  shadow-lg">
-          <div className="px-6 py-4">
-            <h4 className="font-bold text-xl mb-2">Design & Branding</h4>
-            <ul className="text-sm font-semibold text-[#6a6a8e] flex  my-3 uppercase">
-              <li className="border-r-2 border-gray-300 pr-4 ">
-                <Link href="/logo-design-services">logo</Link>
-              </li>
-              <li className="border-r-2 border-gray-300 px-4">
-                <Link href="/brochure-design-service">brochure</Link>
-              </li>
-              <li className="border-r-2 border-gray-300 px-4">
-                <Link href="/animated-services">2d-3d vedio</Link>
-              </li>
-            </ul>
-            <div className="pt-2">
-              <ul className="flex">
-                <li className="mr-2">
-                  <Link href="#">
-                    <Image
-                      className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3"
-                      src={logo}
-                      width={400}
-                      height={400}
-                      alt="Android"
-                    />
-                  </Link>
-                </li>
-                <li className="mr-2">
-                  <Link href="#">
-                    <Image
-                      className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3"
-                      src={brochure}
-                      width={400}
-                      height={400}
-                      alt="Apple"
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <Image
-                      className="w-16 h-16 rounded-full bg-[#f5f7ff] p-3"
-                      src={video}
-                      width={400}
-                      height={400}
-                      alt="Tablet"
-                    />
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <p className="text-gray-700 text-base mt-4 text-justify">
-              We serve all your designing needs like, Corporate Identity,
-              Product Branding, Brand logo designing, Brochures, Leaflets,
-              Animated Vedio 2D/3D & many more.
-            </p>
-          </div>
-          <div className="px-6 py-4">
-            <Link
-              href="/graphic-design-services"
-              className="bg-gradient-to-r from-teal-400 to-indigo-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Read More <i className="fas fa fa-arrow-circle-right ml-1"></i>
-            </Link>
-          </div>
-        </div>
-      </div>
+      </section>
 
       <MutipleServices />
       <Testimonial />
       <Location />
 
-      <div>
-                
-          {isPopupOpen && (
-                <Login handleClosePopup={handleClosePopup} isPopupOpen={isPopupOpen} />
+      {isPopupOpen && (
+        <Login
+          handleClosePopup={() => setIsPopupOpen(false)}
+          isPopupOpen={isPopupOpen}
+        />
       )}
-      </div>
     </>
   );
 };

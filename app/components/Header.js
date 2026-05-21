@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useEffect, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { usePathname } from "next/navigation";
@@ -113,7 +113,7 @@ export default function Header() {
 
   const isActive = (path) => {
     return pathname === path
-      ? "bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text"
+      ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text"
       : "";
   };
 
@@ -142,7 +142,7 @@ export default function Header() {
         <ul className="hidden lg:flex items-center lg:gap-x-3 xl:gap-x-5">
           <li className="group block py-2 px-3 font-semibold md:hover:bg-transparent md:border-0 md:p-0 dark:text-black transition duration-300">
             <Link href="/">
-              <span className="group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text">
+              <span className="group-hover:bg-gradient-to-r group-hover:from-violet-600 group-hover:to-indigo-600 group-hover:text-transparent group-hover:bg-clip-text">
                 Home
               </span>
             </Link>
@@ -151,21 +151,21 @@ export default function Header() {
           <li onMouseEnter={handleMouseEnter} className="relative">
             <Link
               href="/about"
-              className={`font-semibold flex gap-2 items-center py-2 px-3 icon-change md:hover:bg-transparent md:border-0 hover:bg-gradient-to-r hover:from-teal-400 hover:to-indigo-700 hover:text-transparent hover:bg-clip-text md:p-0 dark:text-black ${isActive(
+              className={`font-semibold flex gap-2 items-center py-2 px-3 icon-change md:hover:bg-transparent md:border-0 hover:bg-gradient-to-r hover:from-violet-600 hover:to-indigo-600 hover:text-transparent hover:bg-clip-text md:p-0 dark:text-black ${isActive(
                 "/about"
               )}`}
             >
-              <span className="group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
+              <span className="group-hover:bg-gradient-to-r group-hover:from-violet-600 group-hover:to-indigo-600 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
                 About
               </span>
-              <span className="inline-block bg-gradient-to-r from-teal-400 group-hover:to-indigo-700  bg-clip-text transition duration-300">
+              <span className="inline-block bg-gradient-to-r from-violet-600 group-hover:to-indigo-600  bg-clip-text transition duration-300">
                 <IoMdAdd className=" text-indigo-700 group-hover:text-indigo-700" />
               </span>
 
               {isOpen && (
                 <ul
                   onMouseLeave={handleMouseLeave}
-                  className="absolute top-8 left-0 mt-2 w-48 bg-white border-t-2 border-teal-400 to-indigo-700 shadow-lg "
+                  className="absolute top-8 left-0 mt-2 w-48 bg-white border-t-2 border-violet-500 shadow-lg "
                 >
                   <li>
                     <Link
@@ -218,10 +218,10 @@ export default function Header() {
               onMouseEnter={handleMouseSecond}
               className="flex gap-x-2 items-center"
             >
-              <span className="group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
+              <span className="group-hover:bg-gradient-to-r group-hover:from-violet-600 group-hover:to-indigo-600 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
                 Service
               </span>
-              <span className="inline-block group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
+              <span className="inline-block group-hover:bg-gradient-to-r group-hover:from-violet-600 group-hover:to-indigo-600 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
                 <IoMdAdd className="text-indigo-700 group-hover:text-indigo-700" />
               </span>
             </Link>
@@ -233,7 +233,7 @@ export default function Header() {
               onMouseEnter={handleMouseThird}
               className="flex gap-x-2 items-center"
             >
-              <span className="group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
+              <span className="group-hover:bg-gradient-to-r group-hover:from-violet-600 group-hover:to-indigo-600 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
                 Technologies
               </span>
               <span className="">
@@ -244,7 +244,7 @@ export default function Header() {
 
           <li className="group block py-2 px-3 font-semibold md:hover:bg-transparent md:border-0 md:p-0 dark:text-black transition duration-300">
             <Link href="/blog" className="flex gap-x-2 items-center">
-              <span className="group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
+              <span className="group-hover:bg-gradient-to-r group-hover:from-violet-600 group-hover:to-indigo-600 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
                 Blogs
               </span>
             </Link>
@@ -252,7 +252,7 @@ export default function Header() {
 
           <li className="group block py-2 px-3 font-semibold md:hover:bg-transparent md:border-0 md:p-0 dark:text-black transition duration-300">
             <Link href="/contact" className="flex gap-x-2 items-center">
-              <span className="group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
+              <span className="group-hover:bg-gradient-to-r group-hover:from-violet-600 group-hover:to-indigo-600 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
                 Contact
               </span>
             </Link>
@@ -266,7 +266,7 @@ export default function Header() {
         </button>
         <button
           onClick={() => setIsPopupOpen(true)}
-          className="hidden lg:flex w-fit items-center bg-dark-200 justify-center text-white py-[15px] sm:py-[12px] px-4 sm:px-8 font-heading transition duration-400 ease-in-out rounded-full text-xs sm:text-xs md:text-sm text-nowrap xl:text-base focus:outline-none hover:bg-gray-300 bg-gradient-to-r from-teal-400 to-indigo-700"
+          className="hidden lg:flex w-fit items-center bg-dark-200 justify-center text-white py-[15px] sm:py-[12px] px-4 sm:px-8 font-heading transition duration-400 ease-in-out rounded-full text-xs sm:text-xs md:text-sm text-nowrap xl:text-base focus:outline-none hover:bg-gray-300 bg-gradient-to-r from-violet-600 to-indigo-600"
         >
           Request A Quote
         </button>
@@ -276,7 +276,7 @@ export default function Header() {
         {isSecond && (
           <>
             <div
-              className="hidden lg:flex gap-3 justify-around font-semibold border-t border-teal-400 to-indigo-700 px-5 pb-5 bg-white absolute top-[75px] left-0 w-full"
+              className="hidden lg:flex gap-3 justify-around font-semibold border-t border-violet-500 px-5 pb-5 bg-white absolute top-[75px] left-0 w-full"
               onMouseLeave={handleMouseLeaveSecond}
             >
               <ul className="  mt-2  bg-white w-84 ">
@@ -515,7 +515,7 @@ export default function Header() {
         {isThird && (
           <>
             <div
-              className="hidden lg:flex max-sm:block gap-3 justify-around font-semibold border-t border-teal-400 to-indigo-700 px-5 pb-5 bg-white absolute top-[75px] left-0 w-full"
+              className="hidden lg:flex max-sm:block gap-3 justify-around font-semibold border-t border-violet-500 px-5 pb-5 bg-white absolute top-[75px] left-0 w-full"
               onMouseLeave={handleMouseLeaveThird}
             >
               <ul className="  mt-2  bg-white w-84 ">
@@ -1676,7 +1676,7 @@ export default function Header() {
             </li>
             <div className="w-full px-4">
               <button
-                className="flex items-center bg-dark-200 mt-5 w-full justify-center text-white py-[15px] sm:py-[12px] px-4 sm:px-8 font-heading transition duration-400 ease-in-out rounded-full text-xs sm:text-xs md:text-sm lg:text-base focus:outline-none hover:bg-gray-300 bg-gradient-to-r from-teal-400 to-indigo-700"
+                className="flex items-center bg-dark-200 mt-5 w-full justify-center text-white py-[15px] sm:py-[12px] px-4 sm:px-8 font-heading transition duration-400 ease-in-out rounded-full text-xs sm:text-xs md:text-sm lg:text-base focus:outline-none hover:bg-gray-300 bg-gradient-to-r from-violet-600 to-indigo-600"
                 onClick={handleButtonClick}
               >
                 Request A Quote

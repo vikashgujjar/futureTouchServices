@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Image from "next/image";
 
 import realestate from "../Assets/house.svg";
@@ -34,7 +34,7 @@ const MutipleServices = () => {
     <div className="bg-gradient-to-b from-[#fbf9ed] to-[#fbeaf8] pb-20">
       {/* Heading Section */}
       <div className="pt-20 text-center px-5">
-        <span className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text tracking-wider block mb-2">
+        <span className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text tracking-wider block mb-2">
           We Have Worked Across Multiple Industries
         </span>
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">

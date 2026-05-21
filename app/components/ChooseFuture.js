@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 import Image from "next/image";
 import realestate from "../Assets/teama.svg";
 import tour from "../Assets/link.svg";
@@ -28,7 +28,7 @@ const ChooseFuture = () => {
     <div className="bg-gradient-to-b from-[#ffe2e2] to-[#fff9f4] py-20 px-5 md:px-12 xl:px-28">
       {/* Header */}
       <div className="text-center">
-        <span className="text-xl font-semibold bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text tracking-widest">
+        <span className="text-xl font-semibold bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text tracking-widest">
           We Deliver Our Best
         </span>
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-3">
@@ -61,7 +61,7 @@ const ChooseFuture = () => {
       <div className="cta-card mt-16 flex flex-col lg:flex-row justify-between items-center gap-6 text-center lg:text-left">
         <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold">
           Let’s Start
-          <span className="bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text">
+          <span className="bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text">
             {" "}
             New Project
           </span>{" "}
@@ -69,7 +69,7 @@ const ChooseFuture = () => {
         </h3>
         <button
           onClick={handleButtonClick}
-          className="flex items-center gap-2 border-2 border-black text-black px-8 py-2 bg-white rounded-full shadow-md hover:bg-gradient-to-r from-teal-400 to-indigo-700 hover:text-white hover:border-current transition-all"
+          className="flex items-center gap-2 border-2 border-black text-black px-8 py-2 bg-white rounded-full shadow-md hover:bg-gradient-to-r from-violet-600 to-indigo-600 hover:text-white hover:border-current transition-all"
         >
           Request A Quote <FaAngleRight />
         </button>
