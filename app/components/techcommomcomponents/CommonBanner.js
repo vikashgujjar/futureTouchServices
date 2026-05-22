@@ -4,9 +4,9 @@ import Image from 'next/image'
 export default function CommonBanner({img,title,desc}) {
   return (
     <>
-       <div className="h-24 max-sm:h-[57px] max-md:h-20 max-lg:h-24 bg-white"></div>
+       {/* <div className="h-24 max-sm:h-[57px] max-md:h-20 max-lg:h-24 bg-white"></div> */}
 
-      <div className="  relative overflow-hidden bg-gradient-to-r from-[#442a79] via-[#442a79] to-[#442a79] xl:min-h-96 max-lg:h-auto">
+      <div className="relative overflow-hidden bg-gradient-to-r from-[#442a79] via-[#442a79] to-[#442a79] xl:min-h-96 pt-32 pb-24">
         <div className="flex items-center max-sm:block max-lg:block  px-5 md:px-12 xl:px-28   max-sm:py-7 gap-10  pt-12 max-pt-1   max-xl:py-5">
           <div className="  ">
             <h1 className="text-white font-bold text-4xl  max-lg:text-2xl">

@@ -11,19 +11,21 @@ import Testimonial from "./components/Testimonial";
 import DigitalMarketingService from "./components/DigitalMarketingService";
 import Faq from "./components/Faq";
 import Forms from "./components/Forms";
+import GetNewInsight from "./components/GetNewInsight";
 
 export default function page() {
   return (
     <div>
       <HeroSection />
-      <About />
       <PortfolioMarquee />
+      <About />
       <Service />
       <WhyChoose />
       <ProcessSteps />
       <HelpingBusiness />
       <Heromatterjs />
       <Testimonial />
+      <GetNewInsight />
       <DigitalMarketingService />
       <Faq />
       <Forms />

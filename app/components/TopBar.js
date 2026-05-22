@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,176 +14,149 @@ import {
   FaYoutube,
   FaGithub,
 } from "react-icons/fa";
-// import "./Navbar.css";
+
+const socials = [
+  { Icon: FaFacebookF, href: "https://www.facebook.com/Futureittouch", label: "Facebook" },
+  { Icon: FaTwitter, href: "https://x.com/futureittouch", label: "Twitter" },
+  { Icon: FaLinkedinIn, href: "https://in.linkedin.com/company/future-it-touch", label: "LinkedIn" },
+  { Icon: FaInstagram, href: "https://www.instagram.com/future_it_touch/", label: "Instagram" },
+  { Icon: FaYoutube, href: "https://www.youtube.com/channel/UCirWettrTWfsFRzdGRIc6BQ/about", label: "YouTube" },
+  { Icon: FaGithub, href: "https://github.com/Future-IT-Touch-Private-Limited", label: "GitHub" },
+];
 
 function TopBar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleMouseEnter = () => setIsOpen(true);
-  const toggleVisibility = () => setIsOpen(!isOpen);
-  const handleMouseLeave = () => setIsOpen(false);
-
   return (
-    <header className="w-full  py-2 px-5 md:p-2 lg:px-5 bg-gradient-to-r from-violet-600 to-indigo-600 text-white grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-2">
-      <div className="hidden lg:block">
-        <div className="header-top-call flex sm:justify-start justify-around lg:justify-start font-bold sm:text-sm">
-          <div className="hidden lg:block">
-            <p className="flex items-center text-lg max-sm:text-base pr-2">
-              <FaEnvelope className="mr-3" />
-              <span>info@futuretouch.in</span>
-            </p>
-          </div>
-          <p className="hidden lg:block">|</p>
+    <header className="w-full bg-gradient-to-r from-violet-700 via-violet-600 to-indigo-600 text-white relative z-50">
+      <div className="px-5 md:px-8 xl:px-20 py-2 flex items-center justify-between gap-4">
+
+        {/* ── Left: contact info (desktop only) ── */}
+        <div className="hidden lg:flex items-center gap-4">
+          <a
+            href="mailto:info@futuretouch.in"
+            className="flex items-center gap-2 text-xs text-white/85 hover:text-white transition-colors duration-200"
+          >
+            <FaEnvelope className="w-3 h-3 text-white/70" />
+            info@futuretouch.in
+          </a>
+          <div className="w-px h-3.5 bg-white/25" />
           <a
             href="skype:live:.cid.313b26920df66baf"
-            className="flex text-lg max-sm:text-base items-center ml-3"
+            className="flex items-center gap-2 text-xs text-white/85 hover:text-white transition-colors duration-200"
           >
-            <FaSkype className="mr-2 hidden lg:block" />
-            <span className="hidden lg:block">futuretouch</span>
+            <FaSkype className="w-3 h-3 text-white/70" />
+            futuretouch
           </a>
         </div>
-      </div>
 
-      <div className="header-med-email w-full flex items-center flex-row-reverse justify-between md:px-5 lg:px-0 lg:justify-end gap-5 text-end lg:flex-row">
-        <div className="relative">
-          <button
-            onMouseEnter={handleMouseEnter}
-            onClick={toggleVisibility}
-            className="flex items-center focus:outline-none"
-          >
-            <FaPhoneAlt className="h-4 w-5" />
-            <FaCaretDown className="h-5 ml-1" />
-            <span className="ml-2 font-bold">Support</span>
-          </button>
+        {/* ── Right: support, login, socials ── */}
+        <div className="flex items-center gap-3 ml-auto">
 
-          {isOpen && (
-            <div
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              className="absolute left-[-159%] lg:left-0 lg:right-0 mt-2 w-72 py-3 text-start bg-white rounded-md shadow-lg index-main"
+          {/* Support dropdown */}
+          <div className="relative">
+            <button
+              onMouseEnter={() => setIsOpen(true)}
+              onClick={() => setIsOpen(!isOpen)}
+              className="flex items-center gap-1.5 text-xs font-semibold text-white/90 hover:text-white bg-white/10 hover:bg-white/20 rounded-full px-3 py-1.5 transition-all duration-200"
             >
-              <div className="block px-4 pb-2 text-xl text-gray-700 rounded-md font-bold">
-                Future IT Touch Contacts
+              <FaPhoneAlt className="w-3 h-3" />
+              Support
+              <FaCaretDown className={`w-3 h-3 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+            </button>
+
+            {isOpen && (
+              <div
+                onMouseEnter={() => setIsOpen(true)}
+                onMouseLeave={() => setIsOpen(false)}
+                className="absolute right-0 top-full mt-2 w-72 bg-white rounded-2xl shadow-2xl shadow-violet-200/60 border border-gray-100 overflow-hidden z-50"
+              >
+                {/* Dropdown header */}
+                <div className="bg-gradient-to-r from-violet-600 to-indigo-600 px-4 py-3">
+                  <p className="text-white font-bold text-sm">Future IT Touch Contacts</p>
+                </div>
+
+                <div className="p-3 space-y-1">
+                  {/* HR */}
+                  <p className="text-[10px] font-extrabold text-violet-500 uppercase tracking-widest px-2 pt-1 pb-1.5">
+                    HR Department
+                  </p>
+                  <a
+                    href="tel:+91-7056937000"
+                    className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-violet-50 transition-colors duration-200"
+                  >
+                    <Image src="/Assets/country.webp" width={22} height={22} alt="IN" className="w-5 h-5 object-cover rounded" />
+                    <span className="text-gray-700 font-semibold text-sm">+91-7056937000</span>
+                  </a>
+
+                  <div className="border-t border-gray-100 my-2" />
+
+                  {/* Sales */}
+                  <p className="text-[10px] font-extrabold text-violet-500 uppercase tracking-widest px-2 pb-1.5">
+                    Sales Department
+                  </p>
+                  <a
+                    href="tel:+91-7056997000"
+                    className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-violet-50 transition-colors duration-200"
+                  >
+                    <Image src="/Assets/country.webp" width={22} height={22} alt="IN" className="w-5 h-5 object-cover rounded" />
+                    <span className="text-gray-700 font-semibold text-sm">+91-7056997000</span>
+                  </a>
+                  <a
+                    href="tel:+91-7056937000"
+                    className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-violet-50 transition-colors duration-200"
+                  >
+                    <Image src="/Assets/flag.webp" width={22} height={16} alt="flag" className="w-5 h-4 object-cover rounded" />
+                    <span className="text-gray-700 font-semibold text-sm">+91-7056937000</span>
+                  </a>
+                  <a
+                    href="skype:live:.cid.313b26920df66baf"
+                    className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-violet-50 transition-colors duration-200"
+                  >
+                    <FaSkype className="text-blue-400 w-5 h-5" />
+                    <span className="text-gray-700 font-semibold text-sm">Futuretouch</span>
+                  </a>
+                  <a
+                    href="mailto:info@futuretouch.in"
+                    className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-violet-50 transition-colors duration-200"
+                  >
+                    <FaEnvelope className="text-violet-500 w-5 h-5" />
+                    <span className="text-gray-700 font-semibold text-sm">info@futuretouch.in</span>
+                  </a>
+                </div>
               </div>
+            )}
+          </div>
 
-              <div className="block px-4 py-2 text-sm text-gray-700 bg-[#e4e8ff]">
-                <h5 className="block pb-2 text-base text-[#5f637d] font-bold">
-                  FOR HR DEPARTMENT
-                </h5>
-                <a
-                  href="tel:+91-7056937000"
-                  className="block text-gray-700 font-bold text-base"
-                >
-                  <li className="flex items-center gap-3">
-                    <Image
-                      src="/Assets/country.webp"
-                      width={32}
-                      height={32}
-                      alt="country"
-                      className="object-cover"
-                    />
-                    +91-7056937000
-                  </li>
-                </a>
-              </div>
+          {/* Divider */}
+          <div className="hidden lg:block w-px h-3.5 bg-white/25" />
 
-              <h5 className="block px-4 py-2 text-base text-[#5f637d] font-bold">
-                FOR SALES DEPARTMENT
-              </h5>
-              <ul>
-                <a
-                  href="tel:+91-7056997000"
-                  className="block px-4 py-2 text-gray-700 font-bold text-base"
-                >
-                  <li className="flex items-center gap-3">
-                    <Image
-                      src="/Assets/country.webp"
-                      width={32}
-                      height={32}
-                      alt="country"
-                      className="object-cover"
-                    />
-                    +91-7056997000
-                  </li>
-                </a>
-                <a
-                  href="tel:+91-7056937000"
-                  className="block px-4 py-2 text-gray-700 font-bold text-base"
-                >
-                  <li className="flex items-center gap-3">
-                    <Image
-                      src="/Assets/flag.webp"
-                      width={28}
-                      height={20}
-                      alt="flag"
-                      className="object-cover pl-1"
-                    />
-                    +91-7056937000
-                  </li>
-                </a>
-                <a
-                  href="skype:live:.cid.313b26920df66baf"
-                  className="block px-6 py-2 text-gray-700 font-bold text-base"
-                >
-                  <li className="flex items-center gap-3">
-                    <FaSkype className="text-xl" />
-                    Futuretouch
-                  </li>
-                </a>
-                <a
-                  href="mailto:info@futuretouch.in"
-                  className="block px-6 py-2 text-gray-700 font-bold text-base"
-                >
-                  <li className="flex items-center gap-3">
-                    <FaEnvelope className="text-xl" />
-                    info@futuretouch.in
-                  </li>
-                </a>
-              </ul>
-            </div>
-          )}
-        </div>
+          {/* Login */}
+          <Link
+            href="https://crm.futuretouch.in/authentication/login"
+            className="hidden lg:block text-xs font-medium text-white/80 hover:text-white transition-colors duration-200"
+          >
+            Login
+          </Link>
 
-        <p className="hidden lg:block">|</p>
-        <Link
-          href="https://crm.futuretouch.in/authentication/login"
-          className="hidden lg:block"
-        >
-          Login
-        </Link>
-        <p className="hidden lg:block">|</p>
+          {/* Divider */}
+          <div className="hidden lg:block w-px h-3.5 bg-white/25" />
 
-        <div className="flex gap-2 lg:gap-3">
-          <Link href="https://www.facebook.com/Futureittouch" target="_blank">
-            <FaFacebookF className="h-6 w-6 rounded-full bg-white text-[#4243c9] p-1" />
-          </Link>
-          <Link href="https://x.com/futureittouch" target="_blank">
-            <FaTwitter className="w-6 h-6 rounded-full bg-white text-[#4243c9] p-1" />
-          </Link>
-          <Link
-            href="https://in.linkedin.com/company/future-it-touch"
-            target="_blank"
-          >
-            <FaLinkedinIn className="w-6 h-6 rounded-full bg-white text-[#4243c9] p-1" />
-          </Link>
-          <Link
-            href="https://www.instagram.com/future_it_touch/"
-            target="_blank"
-          >
-            <FaInstagram className="w-6 h-6 rounded-full bg-white text-[#4243c9] p-1" />
-          </Link>
-          <Link
-            href="https://www.youtube.com/channel/UCirWettrTWfsFRzdGRIc6BQ/about"
-            target="_blank"
-          >
-            <FaYoutube className="w-6 h-6 rounded-full bg-white text-[#4243c9] p-1" />
-          </Link>
-          <Link
-            href="https://github.com/Future-IT-Touch-Private-Limited"
-            target="_blank"
-          >
-            <FaGithub className="w-6 h-6 rounded-full bg-white text-[#4243c9] p-1" />
-          </Link>
+          {/* Social icons */}
+          <div className="flex items-center gap-1">
+            {socials.map(({ Icon, href, label }) => (
+              <Link
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="w-6 h-6 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center transition-all duration-200"
+              >
+                <Icon className="w-3 h-3 text-white" />
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </header>

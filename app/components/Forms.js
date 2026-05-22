@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../firebase.config";
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaArrowRight } from "react-icons/fa";
 
 const OtpInput = dynamic(() => import("otp-input-react"), { ssr: false });
 
@@ -47,99 +48,40 @@ const Forms = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-    const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const urlEncodedData = new URLSearchParams();
-    for (const [key, value] of Object.entries(formData)) {
-      urlEncodedData.append(key, value);
-    }
-
-    try {
-      const response = await axios.post('https://futuretouchmail.onrender.com/send-email', urlEncodedData);
-      setLoading(false);
-      setFormData({
-
-        S_name: '',
-        S_email: '',
-        S_phone: '',
-        S_subject: '',
-        message: ''
-      });
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Success!',
-        text: 'Your query has been submitted.',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.href = '/';
-        }
-      });
-
-
-
-    } catch (error) {
-      setLoading(false);
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-      });
-    }
+    setFormData({ ...formData, [name]: value });
   };
 
   function onCaptchVerify() {
-  if (typeof window !== "undefined" && !window.recaptchaVerifier) {
-    window.recaptchaVerifier = new RecaptchaVerifier(
-      "recaptcha-container",
-      {
-        size: "invisible",
-        callback: () => {
-          onSignup();
+    if (typeof window !== "undefined" && !window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        "recaptcha-container",
+        {
+          size: "invisible",
+          callback: () => { onSignup(); },
+          "expired-callback": () => {},
         },
-        "expired-callback": () => {},
-      },
-      auth
-    );
+        auth
+      );
+    }
   }
-}
-
 
   function onSignup() {
     const { S_name, S_email, S_phone, message } = formData;
-
     if (!S_name || !S_email || !S_phone || !message) {
-      Swal.fire({
-        icon: "warning",
-        title: "Missing Information",
-        text: "Please fill out all the mandatory fields.",
-      });
+      Swal.fire({ icon: "warning", title: "Missing Information", text: "Please fill out all the mandatory fields." });
       return;
     }
-
     setShowOTP(true);
     onCaptchVerify();
-
     const appVerifier = window.recaptchaVerifier;
     const formatPh = formData.cr_code + formData.S_phone;
-
     signInWithPhoneNumber(auth, formatPh, appVerifier)
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
         setLoading(false);
         setShowOTP(true);
       })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+      .catch((error) => { console.log(error); setLoading(false); });
   }
 
   const onOTPVerify = async () => {
@@ -151,81 +93,68 @@ const Forms = () => {
         for (const [key, value] of Object.entries(formData)) {
           urlEncodedData.append(key, value);
         }
-
         try {
-          await axios.post(
-            "https://futuretouchmail.onrender.com/send-email",
-            urlEncodedData
+          await axios.post("https://futuretouchmail.onrender.com/send-email", urlEncodedData);
+          setLoading(false);
+          setFormData({ S_name: "", S_email: "", S_phone: "", S_subject: "", message: "" });
+          Swal.fire({ icon: "success", title: "Success!", text: "Your query has been submitted." }).then(
+            (result) => { if (result.isConfirmed) { setLoading(false); setOTP(""); router.push("/"); } }
           );
+        } catch {
           setLoading(false);
-
-          setFormData({
-            S_name: "",
-            S_email: "",
-            S_phone: "",
-            S_subject: "",
-            message: "",
-          });
-
-          Swal.fire({
-            icon: "success",
-            title: "Success!",
-            text: "Your query has been submitted.",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              setLoading(false);
-              setOTP("");
-              router.push("/");
-            }
-          });
-        } catch (error) {
-          setLoading(false);
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong!",
-          });
+          Swal.fire({ icon: "error", title: "Oops...", text: "Something went wrong!" });
         }
       })
       .catch(() => {
         setLoading(false);
-        Swal.fire({
-          icon: "error",
-          title: "Invalid OTP",
-          text: "Please enter the correct OTP.",
-        });
+        Swal.fire({ icon: "error", title: "Invalid OTP", text: "Please enter the correct OTP." });
       });
   };
 
+  /* ── Same dark input style as GetNewInsight ── */
   const inputCls =
-    "w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3.5 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-violet-400 focus:bg-white focus:ring-2 focus:ring-violet-100 transition-all duration-200";
+    "w-full rounded-xl border border-white/10 bg-white/[0.08] px-4 py-3.5 text-sm text-white placeholder-white/30 outline-none focus:border-violet-400/60 focus:bg-white/[0.12] focus:ring-2 focus:ring-violet-500/20 transition-all duration-200";
 
   const contactInfo = [
     {
-      icon: "📍",
+      icon: <FaMapMarkerAlt className="w-4 h-4" />,
       label: "Address",
       value: "SCO 54-55, 2nd Floor, Sector 34A, Chandigarh 160022",
+      accent: "from-violet-500 to-violet-700",
     },
-    { icon: "📞", label: "Phone", value: "+91 70569-37000", href: "tel:+917056937000" },
-    { icon: "✉️", label: "Email", value: "info@futuretouch.in", href: "mailto:info@futuretouch.in" },
+    {
+      icon: <FaPhoneAlt className="w-4 h-4" />,
+      label: "Phone",
+      value: "+91 70569-37000",
+      href: "tel:+917056937000",
+      accent: "from-indigo-500 to-indigo-700",
+    },
+    {
+      icon: <FaEnvelope className="w-4 h-4" />,
+      label: "Email",
+      value: "info@futuretouch.in",
+      href: "mailto:info@futuretouch.in",
+      accent: "from-purple-500 to-purple-700",
+    },
   ];
 
   return (
     <section
       id="scroll-down"
-      className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-violet-950 to-indigo-950 py-20"
+      className="relative overflow-hidden bg-[#07021a] py-24"
     >
-      {/* Decorative blobs */}
-      <div className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full bg-violet-600/20 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-indigo-600/20 blur-3xl" />
-      {/* Dot grid */}
+      {/* Grid texture */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
         style={{
-          backgroundImage: "radial-gradient(circle, #a78bfa 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
+          backgroundImage:
+            "linear-gradient(#a78bfa 1px, transparent 1px), linear-gradient(90deg, #a78bfa 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
         }}
       />
+      {/* Glow blobs */}
+      <div className="pointer-events-none absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-violet-600/20 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 right-1/4 h-80 w-80 rounded-full bg-indigo-600/20 blur-3xl" />
 
       <div id="recaptcha-container" />
 
@@ -234,7 +163,7 @@ const Forms = () => {
         <div className="text-center mb-14">
           <span
             className="text-4xl bg-gradient-to-r from-violet-400 to-indigo-300 text-transparent bg-clip-text tracking-widest block mb-2"
-            style={{ fontFamily: "’Bilbo Swash Caps’, cursive" }}
+            style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
           >
             Contact Us
           </span>
@@ -244,22 +173,26 @@ const Forms = () => {
               Amazing Together
             </span>
           </h2>
-          <p className="text-slate-400 text-base mt-4 max-w-xl mx-auto">
+          <p className="text-white/50 text-base mt-4 max-w-xl mx-auto leading-relaxed">
             Share your project details and our team will get back to you within
             24 hours with a free consultation.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-          {/* Left: contact info + map */}
-          <div className="space-y-6">
-            {/* Contact cards */}
+
+          {/* ── Left: contact info + map ── */}
+          <div className="space-y-4">
             {contactInfo.map((item) => (
               <div
                 key={item.label}
-                className="flex items-start gap-4 bg-white/5 border border-white/10 rounded-2xl px-5 py-4 backdrop-blur-sm"
+                className="flex items-center gap-4 bg-white/[0.06] border border-white/10 rounded-2xl px-5 py-4 backdrop-blur-sm hover:border-white/20 hover:bg-white/[0.09] transition-all duration-200"
               >
-                <span className="text-2xl shrink-0">{item.icon}</span>
+                <div
+                  className={`w-11 h-11 rounded-xl bg-gradient-to-br ${item.accent} flex items-center justify-center text-white shrink-0 shadow-md`}
+                >
+                  {item.icon}
+                </div>
                 <div>
                   <p className="text-violet-300 text-xs font-semibold uppercase tracking-wider mb-0.5">
                     {item.label}
@@ -279,11 +212,11 @@ const Forms = () => {
             ))}
 
             {/* Map */}
-            <div className="rounded-2xl overflow-hidden border border-white/10 shadow-xl">
+            <div className="rounded-2xl overflow-hidden border border-white/10 shadow-xl shadow-violet-900/30">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d27444.62041181375!2d76.683024!3d30.702160000000003!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a838963fb5049%3A0x4188b8c6dd4c764a!2sFuture%20IT%20Touch%20Private%20Limited%20%7C%20Website%20Design%20and%20Development%20Company!5e0!3m2!1sen!2sin!4v1716290401199!5m2!1sen!2sin"
                 width="100%"
-                height="220"
+                height="275"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
@@ -293,18 +226,25 @@ const Forms = () => {
             </div>
           </div>
 
-          {/* Right: form card */}
-          <div className="bg-white rounded-3xl shadow-2xl p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-1">
-              Request A Free Quote
-            </h3>
-            <p className="text-gray-500 text-sm mb-7">
-              Fill in the details below and we&apos;ll shape your vision into
-              reality.
-            </p>
+          {/* ── Right: form card (dark glassmorphism) ── */}
+          <div className="bg-white/[0.06] border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
+            {/* Form header */}
+            <div className="flex items-center gap-4 mb-7">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-violet-900/40 shrink-0">
+                <FaEnvelope className="text-white text-base" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white leading-none">
+                  Request A Free Quote
+                </h3>
+                <p className="text-white/40 text-xs mt-1">
+                  Fill in the details and we&apos;ll shape your vision into reality.
+                </p>
+              </div>
+            </div>
 
             {/* Name + Email */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
               <input
                 type="text"
                 name="S_name"
@@ -324,12 +264,12 @@ const Forms = () => {
             </div>
 
             {/* File + Skype */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
               <input
                 type="file"
                 name="photo"
                 accept="image/*"
-                className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 pt-3 pb-2.5 text-sm text-gray-500 outline-none focus:border-violet-400 transition-all duration-200"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.08] px-4 pt-3 pb-2.5 text-sm text-white/50 outline-none focus:border-violet-400/60 transition-all duration-200 file:mr-3 file:text-xs file:text-violet-300 file:bg-transparent file:border-0 file:font-semibold cursor-pointer"
               />
               <input
                 type="text"
@@ -342,12 +282,12 @@ const Forms = () => {
             </div>
 
             {/* Phone with country code */}
-            <div className="relative mb-4">
+            <div className="relative mb-3">
               <select
                 onChange={handleChange}
                 name="cr_code"
                 value={formData.cr_code}
-                className="absolute h-full w-24 border-r border-gray-200 bg-gray-50 text-xs rounded-l-xl px-2 outline-none focus:ring-0"
+                className="absolute h-full w-24 border-r border-white/10 bg-[#0f0720] text-white text-xs rounded-l-xl px-2 outline-none focus:ring-0 cursor-pointer"
               >
                 {countryCodes.map((country, index) => (
                   <option key={index} value={country.dialCode}>
@@ -368,7 +308,7 @@ const Forms = () => {
             {/* Message */}
             <textarea
               name="message"
-              rows={5}
+              rows={4}
               placeholder="Tell us about your project…"
               className={`${inputCls} mb-5 resize-none`}
               value={formData.message}
@@ -379,7 +319,7 @@ const Forms = () => {
             <button
               type="button"
               onClick={onSignup}
-              className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-violet-300/30 hover:shadow-violet-400/40 hover:-translate-y-0.5 transition-all duration-200"
+              className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-violet-900/40 hover:shadow-violet-600/40 hover:-translate-y-0.5 transition-all duration-200"
             >
               {loading ? (
                 <div className="flex items-center justify-center gap-2">
@@ -387,34 +327,38 @@ const Forms = () => {
                   Sending…
                 </div>
               ) : (
-                "Send Message & Get Free Quote"
+                <span className="flex items-center justify-center gap-2">
+                  Send Message &amp; Get Free Quote
+                  <FaArrowRight className="w-3.5 h-3.5" />
+                </span>
               )}
             </button>
 
-            <p className="text-center text-xs text-gray-400 mt-4">
+            {/* Privacy note */}
+            <p className="text-center text-xs text-white/30 mt-4">
               We respond within 24 hours · No spam · 100% confidential
             </p>
           </div>
         </div>
       </div>
 
-      {/* OTP Popup */}
+      {/* ── OTP Popup ── */}
       {showOTP && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900/80 backdrop-blur-sm z-50">
-          <div className="bg-white flex flex-col justify-center items-center p-8 rounded-3xl shadow-2xl max-w-md w-full mx-4 relative">
+          <div className="bg-white/[0.08] border border-white/15 backdrop-blur-md flex flex-col justify-center items-center p-8 rounded-3xl shadow-2xl max-w-md w-full mx-4 relative">
             <button
-              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 transition"
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/60 hover:text-white transition"
               onClick={() => setShowOTP(false)}
             >
               ✕
             </button>
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center mb-5 shadow-lg">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center mb-5 shadow-lg shadow-violet-900/40">
               <span className="text-white text-2xl">📱</span>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-1 text-center">
+            <h2 className="text-2xl font-bold text-white mb-1 text-center">
               Verify Your Phone
             </h2>
-            <p className="text-center text-gray-500 text-sm mb-6">
+            <p className="text-center text-white/50 text-sm mb-6">
               Enter the 6-digit OTP sent to your phone number
             </p>
             <OtpInput
@@ -426,16 +370,16 @@ const Forms = () => {
               autoFocus
               className="opt-container"
             />
-            <p className="text-center text-gray-400 text-xs mt-4">
+            <p className="text-center text-white/30 text-xs mt-4">
               Please wait 2–3 minutes for the OTP to arrive.
             </p>
             <div className="flex w-full gap-3 mt-8">
-              <button className="flex-1 py-3 rounded-xl border-2 border-violet-600 text-violet-600 text-sm font-semibold hover:bg-violet-50 transition">
+              <button className="flex-1 py-3 rounded-xl border border-violet-400/50 text-violet-300 text-sm font-semibold hover:bg-violet-500/10 transition">
                 Resend OTP
               </button>
               <button
                 disabled={loading}
-                className="flex-1 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-semibold hover:from-violet-700 hover:to-indigo-700 transition disabled:opacity-60"
+                className="flex-1 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-semibold hover:from-violet-500 hover:to-indigo-500 transition disabled:opacity-60"
                 onClick={onOTPVerify}
               >
                 {loading ? (
@@ -455,5 +399,3 @@ const Forms = () => {
 };
 
 export default Forms;
-
-

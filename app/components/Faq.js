@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { FaPlus, FaMinus, FaArrowRight } from "react-icons/fa";
+import { FaPlus, FaMinus, FaArrowRight, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
 const faqData = [
   {
@@ -40,9 +40,22 @@ export default function Faq() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="py-20 px-4 sm:px-6 md:px-12 xl:px-28 bg-white">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        {/* Left: heading + CTA */}
+    <section className="py-24 px-4 sm:px-6 md:px-12 xl:px-28 bg-white relative overflow-hidden">
+      {/* Subtle dot texture */}
+      <div
+        className="absolute inset-0 opacity-[0.35] pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle, #e2e8f0 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+      {/* Glow blobs */}
+      <div className="absolute -top-24 -right-24 w-80 h-80 bg-violet-50 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-indigo-50 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+
+        {/* ── Left: heading + CTA ── */}
         <div className="lg:col-span-4 lg:sticky lg:top-32">
           <span
             className="text-4xl bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text tracking-widest block mb-2"
@@ -50,60 +63,102 @@ export default function Faq() {
           >
             FAQ
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-3 mb-6 leading-tight">
-            Our Expert{" "}
-            <span className="bg-gradient-to-r from-violet-600 to-indigo-600 text-transparent bg-clip-text">
-              Answers
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-3 mb-5 leading-tight">
+            Frequently Asked{" "}
+            <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+              Questions
             </span>
           </h2>
-          <p className="text-gray-500 text-base leading-relaxed mb-8">
+          <p className="text-gray-500 text-base leading-relaxed mb-6">
             Our team continuously engages in professional development and
             industry events to stay abreast of the latest IT trends and
             technologies.
           </p>
 
-          <div className="bg-gradient-to-br from-violet-50 to-indigo-50 border border-violet-100 rounded-2xl p-6">
-            <p className="font-bold text-gray-900 mb-2">Still have questions?</p>
-            <p className="text-sm text-gray-500 mb-5">
-              Our team is happy to answer any questions about our services,
-              pricing, or process.
+          {/* Quick stat chips */}
+          <div className="flex gap-3 mb-7">
+            <div className="bg-violet-50 border border-violet-100 rounded-xl px-4 py-2.5 text-center flex-1">
+              <p className="text-lg font-extrabold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent leading-none">
+                {faqData.length}
+              </p>
+              <p className="text-xs text-gray-500 mt-0.5 font-medium">Questions</p>
+            </div>
+            <div className="bg-indigo-50 border border-indigo-100 rounded-xl px-4 py-2.5 text-center flex-1">
+              <p className="text-lg font-extrabold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent leading-none">
+                24h
+              </p>
+              <p className="text-xs text-gray-500 mt-0.5 font-medium">Response Time</p>
+            </div>
+          </div>
+
+          {/* Contact card */}
+          <div className="bg-gradient-to-br from-violet-600 to-indigo-700 rounded-2xl p-6 text-white">
+            <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-4">
+              <FaPhoneAlt className="text-white w-4 h-4" />
+            </div>
+            <p className="font-extrabold text-base mb-1.5">Still have questions?</p>
+            <p className="text-sm text-white/70 mb-5 leading-relaxed">
+              Our team is happy to answer anything about our services, pricing,
+              or process. Reach out any time.
             </p>
+            <div className="space-y-2 mb-5">
+              <a
+                href="mailto:info@futureittouch.com"
+                className="flex items-center gap-2.5 bg-white/15 hover:bg-white/25 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200"
+              >
+                <FaEnvelope className="w-3.5 h-3.5 text-white/80" />
+                info@futureittouch.com
+              </a>
+            </div>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-6 py-3 text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-violet-200 hover:-translate-y-0.5 transition-all duration-200"
+              className="inline-flex items-center gap-2 bg-white text-violet-700 px-6 py-2.5 text-sm font-bold rounded-full hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
             >
               Contact Us <FaArrowRight className="w-3 h-3" />
             </Link>
           </div>
         </div>
 
-        {/* Right: accordion */}
+        {/* ── Right: accordion ── */}
         <div className="lg:col-span-8 space-y-3">
           {faqData.map((item, index) => (
             <div
               key={index}
-              className={`border rounded-2xl overflow-hidden transition-all duration-200 ${
+              className={`border rounded-2xl overflow-hidden transition-all duration-300 ${
                 active === index
-                  ? "border-violet-200 shadow-sm"
-                  : "border-gray-100"
+                  ? "border-violet-200 bg-violet-50/60 shadow-sm shadow-violet-100"
+                  : "border-gray-100 bg-white hover:border-violet-100"
               }`}
             >
               <button
                 onClick={() => setActive(active === index ? null : index)}
-                className="w-full flex items-center justify-between px-6 py-5 text-left gap-4"
+                className="w-full flex items-center gap-4 px-6 py-5 text-left"
               >
+                {/* Number badge */}
                 <span
-                  className={`font-semibold text-base ${
+                  className={`shrink-0 w-9 h-9 rounded-xl text-xs font-extrabold flex items-center justify-center transition-all duration-200 ${
+                    active === index
+                      ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-md shadow-violet-300/40"
+                      : "bg-gray-100 text-gray-400"
+                  }`}
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                <span
+                  className={`flex-1 font-semibold text-base leading-snug transition-colors duration-200 ${
                     active === index ? "text-violet-700" : "text-gray-900"
                   }`}
                 >
                   {item.question}
                 </span>
+
+                {/* Plus / Minus toggle */}
                 <span
-                  className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                  className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
                     active === index
-                      ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white"
-                      : "bg-gray-100 text-gray-500"
+                      ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md shadow-violet-300/40"
+                      : "bg-gray-100 text-gray-400"
                   }`}
                 >
                   {active === index ? (
@@ -115,7 +170,8 @@ export default function Faq() {
               </button>
 
               {active === index && (
-                <div className="px-6 pb-5">
+                <div className="px-6 pb-5" style={{ paddingLeft: "76px" }}>
+                  <div className="h-px bg-gradient-to-r from-violet-200 to-transparent mb-4" />
                   <p className="text-gray-500 text-sm leading-relaxed">
                     {item.answer}
                   </p>

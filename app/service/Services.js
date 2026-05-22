@@ -174,10 +174,10 @@ const Services = () => {
 
   return (
     <>
-      <div className="h-24 max-sm:h-[57px] max-md:h-20 max-lg:h-24 bg-white" />
+      {/* <div className="h-24 max-sm:h-[57px] max-md:h-20 max-lg:h-24 bg-white" /> */}
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#1a0533] via-[#2d1060] to-[#0f2460] py-20 sm:py-24">
+      <section className="relative overflow-hidden pt-48! bg-gradient-to-br from-[#1a0533] via-[#2d1060] to-[#0f2460] py-20 sm:py-24">
         <div className="absolute inset-0 opacity-20 pointer-events-none">
           <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-violet-500 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
@@ -214,7 +214,7 @@ const Services = () => {
               href="tel:+917056937000"
               className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-7 py-3 rounded-full font-semibold hover:bg-white/20 transition-all"
             >
-              <FaPhone className="w-4 h-4" /> Call: 7056937000
+              <FaPhone className="w-4 h-4 rotate-90" /> Call: 7056937000
             </Link>
           </div>
           <div className="flex flex-wrap gap-6 text-sm text-white/60">
