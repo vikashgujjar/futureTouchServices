@@ -80,7 +80,7 @@ export default function ServicePageTemplate({
       {/* <div className="h-24 max-sm:h-[57px]" /> */}
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-violet-50 to-indigo-50 py-20 md:py-28 pt-48!">
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-violet-50 to-indigo-50 py-20 md:py-28 pt-24 md:pt-32! lg:pt-48!">
         <div className="pointer-events-none absolute -top-32 -right-32 h-[500px] w-[500px] rounded-full bg-violet-200/30 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-32 -left-32 h-[500px] w-[500px] rounded-full bg-indigo-200/30 blur-3xl" />
         <div
@@ -227,9 +227,9 @@ export default function ServicePageTemplate({
             <div className="grid grid-cols-1 lg:grid-cols-5 items-start gap-10">
               {/* Sticky image */}
               {featuresImage && (
-                <div className="sticky top-30 lg:flex lg:col-span-2 justify-center">
-                  <div className="sticky top-28 w-full">
-                    <div className="absolute inset-0 -z-10 translate-x-3 translate-y-3 rounded-3xl bg-gradient-to-br from-violet-200/60 to-indigo-200/60" />
+                <div className="lg:sticky top-30 lg:flex lg:col-span-2 justify-center">
+                  <div className="lg:sticky top-28 w-full">
+                    <div className="lg:flex hidden absolute inset-0 -z-10 translate-x-3 translate-y-3 rounded-3xl bg-gradient-to-br from-violet-200/60 to-indigo-200/60" />
                     <Image
                       src={featuresImage}
                       alt={featuresTitle}

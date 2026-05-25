@@ -80,7 +80,7 @@ export default function Header() {
         fixed
           ? "top-0 bg-white/[0.98] backdrop-blur-md shadow-sm border-b-0 border-violet-100"
           : "sm:pt-2 md:pt-4 bg-transparent"
-      } px-5 md:px-8 xl:p4x-20`}
+      } px-0 md:px-8 xl:px-20`}
     >
       {/* ── Desktop nav ── */}
       <div
@@ -340,7 +340,7 @@ export default function Header() {
       )}
 
       {/* ── Mobile nav bar ── */}
-      <nav className="lg:hidden bg-white border border-gray-100 rounded-2xl mx-0 mt-1 shadow-sm">
+      <nav className="lg:hidden bg-white border border-gray-100 rounded-none w-full mx-0 mt-0 shadow-sm">
         <div className="flex justify-between items-center px-4 py-3">
           <Link href="/">
             <img
@@ -370,7 +370,7 @@ export default function Header() {
       )}
 
       <div
-        className={`fixed z-50 top-0 left-0 h-full bg-white shadow-2xl transition-transform duration-300 ease-in-out overflow-y-auto ${
+        className={`fixed z-99999 top-0 left-0 h-full bg-white shadow-2xl transition-transform duration-300 ease-in-out overflow-y-auto ${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         } w-80`}
       >
@@ -586,5 +586,5 @@ export default function Header() {
         </div>
       </div>
     </div>
-  );
+  );  
 }

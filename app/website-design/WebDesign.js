@@ -104,7 +104,7 @@ const WebDesign = () => {
       {/* <div className="h-24 max-sm:h-[57px]" /> */}
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-violet-50 to-indigo-50 py-20 md:py-28  pt-48!">
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-violet-50 to-indigo-50 py-20 md:py-28 pt-24 md:pt-32! lg:pt-48!">
         {/* decorative blobs */}
         <div className="pointer-events-none absolute -top-32 -right-32 h-[500px] w-[500px] rounded-full bg-violet-200/30 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-32 -left-32 h-[500px] w-[500px] rounded-full bg-indigo-200/30 blur-3xl" />
